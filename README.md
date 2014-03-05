@@ -3,4 +3,4 @@ instacase
 
 iPhone Case App
 
-Run with DEBUG=instacase ./bin/www
+Run with `npm start`
