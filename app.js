@@ -27,12 +27,10 @@ var app = express();
 //   have a database of user records, the complete Facebook profile is serialized
 //   and deserialized.
 passport.serializeUser(function(user, done) {
-    console.log('wut');
     done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-    console.log('wat');
     done(null, obj);
 });
 
@@ -82,7 +80,10 @@ app.use(app.router);
 // Views
 
 app.get('/', routes.index);
-app.get('/users', users.list);
+
+app.get('/user/login', users.login);
+app.get('/user/account', ensureAuthenticated, users.account);
+app.get('/user/logout', users.logout);
 
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -132,6 +133,17 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login')
+}
 
 
 module.exports = app;

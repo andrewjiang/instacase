@@ -1,4 +1,5 @@
 /* GET home page. */
-exports.index = function(req, res){
-  res.render('index', { title: 'instacase' });
+exports.index = function(req, res) {
+    res.render('index', { title: 'instacase',
+                          user: req.user });
 };

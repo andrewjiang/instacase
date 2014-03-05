@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}</title>
+    <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}</p>
+
+    {{#user}}
+    <p>Welcome, {{displayName}}!</p>
+    <a href="/user/logout">Logout</a>
+    {{/user}}
+    {{^user}}
     <a href="/auth/facebook">Login with Facebook!</a>
+    {{/user}}
   </body>
 </html>
