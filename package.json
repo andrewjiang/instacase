@@ -1,0 +1,10 @@
+{
+  "name": "instacase",
+  "description": "web app for printing cases and money",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.0.0-rc2",
+    "passport": "0.2.0"
+  }
+}
