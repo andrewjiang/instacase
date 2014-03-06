@@ -1,20 +1,23 @@
 {
-  "name": "instacase",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "express": "~3.4.8",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
-    "body-parser": "~1.0.0",
-    "debug": "~0.7.4",
-    "hjs": "~0.0.6",
-    "stylus": "0.42.3",
-    "passport": "~0.2.0",
-    "passport-facebook": "~1.0.2"
-  }
+    "dependencies": {
+        "body-parser": "~1.0.0",
+        "cookie-parser": "~1.0.1",
+        "debug": "~0.7.4",
+        "express": "~3.4.8",
+        "hjs": "~0.0.6",
+        "morgan": "~1.0.0",
+        "passport": "~0.2.0",
+        "passport-facebook": "~1.0.2",
+        "static-favicon": "~1.0.0",
+        "stylus": "0.42.3"
+    },
+    "engines": {
+        "node": "0.10.x"
+    },
+    "name": "instacase",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www"
+    },
+    "version": "0.0.1"
 }
