@@ -3,11 +3,23 @@ instacase
 
 iPhone Case App
 
-Run with `npm start` and go to `http://localhost:8080`
+Quickstart
+----------
 
-*OR*
+Run with `npm start` and go to `http://localhost:3000`
 
-`sudo npm install -g supervisor`
-`supervisor --debug bin/www`
+Debugging
+---------
+
+- `sudo npm install -g supervisor node-inspector`
 
 For automatic server reloading when source files change
+- `supervisor server.js`
+
+Enable debug statements in console
+- `DEBUG=instacase supervisor server.js`
+
+Debug node.js code in browser
+- `node-inspector &`
+- `supervisor --debug server.js`
+- Go to `http://localhost:8080/debug?port=5858`

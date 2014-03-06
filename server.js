@@ -1,3 +1,10 @@
+/*
+  TODO: use this layout: https://github.com/madhums/node-express-mongoose-demo
+  TODO: break out config into config files
+*/
+
+var debug = require('debug')('instacase');
+
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -146,4 +153,12 @@ function ensureAuthenticated(req, res, next) {
 }
 
 
+app.set('port', process.env.PORT || 3000);
+
+// TODO: should this be exposed?
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+// expose app
 module.exports = app;
