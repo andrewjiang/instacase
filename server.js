@@ -17,6 +17,10 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var FACEBOOK_APP_ID = '236858273165593';
 var FACEBOOK_APP_SECRET = '1a1c8584fd3ed34796f39ba5f826d4d7';
+var FACEBOOK_OAUTH_CALLBACK_URL =
+        (process.env.NODE_ENV === 'production'
+            ? 'http://instacase.herokuapp.com/auth/facebook/callback'
+            : 'http://localhost:8080/auth/facebook/callback');
 
 var routes = require('./routes');
 var users = require('./routes/user');
@@ -50,7 +54,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
         clientID: FACEBOOK_APP_ID,
         clientSecret: FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:8080/auth/facebook/callback"
+        callbackURL: FACEBOOK_OAUTH_CALLBACK_URL
     },
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
