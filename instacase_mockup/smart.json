@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "router": {},
+    "bootstrap-3": {},
+    "jquery-ui": {},
+    "three.js": {}
+  }
+}
