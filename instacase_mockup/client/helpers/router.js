@@ -1,4 +1,4 @@
 Meteor.Router.add({
 	'/': 'home',
-	'/customize': 'customize'
+	'/select_image': 'select_image'
 });
