@@ -1,0 +1,11 @@
+<template name="select_image">
+		<div class="button-wrap">
+		<div class="top-button btn btn-default" onclick="getFile();">
+			<span class="glyphicon glyphicon-camera icon-large"></span>
+			Choose your image
+		</div>
+		</div>
+		<form id="form1" runat="server" class="hidden">
+        	<input type='file' id="photo_select" onchange="readURL(this);" />
+    	</form>
+</template>

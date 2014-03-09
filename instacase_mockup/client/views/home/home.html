@@ -1,13 +1,10 @@
 <template name="home">
-	<div class="wrapper">
-		<div class="button-wrap">
-		<div class="top-button btn btn-default" onclick="getFile();">
-			<span class="glyphicon glyphicon-camera icon-large"></span>
-			Choose your image
+		<div class="row" id="welcome-title">
+			<div class="col-md-12">
+				<img src="/images/instacase_small.png">
+				<span id="welcome-logo">
+					InstaCase
+				</span>
+			</div>
 		</div>
-		</div>
-		<form id="form1" runat="server" class="hidden">
-        	<input type='file' id="photo_select" onchange="readURL(this);" />
-    	</form>
-	</div>
 </template>

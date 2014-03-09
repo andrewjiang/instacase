@@ -54,7 +54,7 @@
 		border: 1px solid	#000;
 		margin: auto;
 		width: 324px;
-		background-color: #333;
+		background-color: #FAFBFC;
 		color: #fff;
 	}
 
@@ -67,7 +67,7 @@
 		width: 100%;
 		z-index: 10;
 		box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
-		color: #fff;
+		color: #000;
 		padding-top: 10px;
 	}
 	.insta-header h2{
@@ -84,6 +84,27 @@
 	}
 /* End Layouts CSS */
 
+/* Welcome Page CSS */
+	
+	#welcome-title{
+		margin: auto;
+		margin-top: 100px;
+	}
+	#welcome-title img{
+		height: 60px;
+		width: 60px;
+	}
+	#welcome-logo{
+		color: #3498db;
+		font-weight: 700;
+		font-family: 'Montserrat Alternates', 'Allan', 'Arial';
+		font-size: 40px;
+		text-shadow:0px 0px 0 rgb(-48,-27,-6), 1px 1px 0 rgb(-120,-99,-78),2px 2px 1px rgba(70,70,70,0.8),2px 2px 1px rgba(70,70,70,0.4),0px 0px 1px rgba(70,70,70,.2);
+		position: inline;
+	}
+
+/* End Welcome Page CSS */
+
 /* StepOne CSS */
 	.wrapper{
 		margin-top: 80px;
@@ -95,7 +116,7 @@
 		border-radius: 24px;
 		overflow:hidden;
 		position: relative;
-		width: 360px;
+		width: 95%;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -103,7 +124,7 @@
 		border: 1px solid #FAFBFC;
 		background-color: rgba(41, 128, 185, 0.8);
 		border-radius: 24px;
-		height: 560px;
+		height: 200px;
 		overflow:hidden;
 		position: relative;
 		width: 360px;
@@ -111,13 +132,13 @@
 		margin-right: auto;
 	}
 	.top-button{
-		height: 560px;
+		height: 200px;
 		width: 100%;
 		border-radius: 20px;
 		border: 1px solid #9CC4E4;
-		font-size: 32px;
+		font-size: 24px;
 		color: #FAFBFC;
-		padding: 150px 0px;
+		padding: 20px 0px;
 		background-color: #2980b9;
 		opacity: 0.9;
 	}
