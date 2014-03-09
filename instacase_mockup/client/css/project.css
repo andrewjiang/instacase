@@ -225,13 +225,25 @@
 	.button-wrap{
 		padding: 4px;
 		margin-top: 5px;
-		border: 1px solid #FAFBFC;
+		border: 1px solid #FFF;
 		border-radius: 46px;
 		overflow:hidden;
 		position: relative;
 		width: 80%;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	.button-wrap-filled{
+		padding: 4px;
+		margin-top: 5px;
+		border: 1px solid #111;
+		border-radius: 46px;
+		overflow:hidden;
+		position: relative;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #000;
 	}
 	.img-wrap{
 		border: 1px solid #FAFBFC;
@@ -259,6 +271,20 @@
 		opacity: 1;
 		background-color: transparent;
 	}
+	.top-button-filled{
+		height: 460px;
+		width: 100%;
+		border-radius: 42px;
+		border: 1px solid #9CC4E4;
+		font-size: 24px;
+		color: #FFF;
+		padding: 120px 0px;
+		opacity: 0.8;
+		background-color: transparent;
+		background-image: url('images/photo-sample.jpg');;
+		background-position: 30%;
+	}
+
 	.icon-large{
 		font-size: 72px;
 		display: block;

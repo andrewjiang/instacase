@@ -1,0 +1,11 @@
+<template name="preview_case">
+		<div class="button-wrap-filled">
+			<div class="top-button-filled btn btn-default" onclick="getFile();">
+					
+			</div>
+		</div>
+		<form id="form1" runat="server" class="hidden">
+    	<input type='file' id="photo_select" onchange="readURL(this);" />
+	</form>
+	{{>footer}}
+</template>
