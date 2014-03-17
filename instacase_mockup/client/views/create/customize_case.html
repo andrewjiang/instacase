@@ -1,0 +1,16 @@
+<template name="customize_case">
+		<div class="button-wrap-filled black-case">
+			<div class="top-button-filled btn btn-default" onclick="getFile();">
+				<div class="invisible" id="sample-text">Best friends
+				</div>
+				<div class="invisible" id="sample-icon">
+					<span class="glyphicon glyphicon-heart" ></span>
+				</div>
+				
+			</div>
+		</div>
+		<form id="form1" runat="server" class="hidden">
+    	<input type='file' id="photo_select" onchange="readURL(this);" />
+	</form>
+	{{>footer}}
+</template>
