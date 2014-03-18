@@ -24,6 +24,14 @@ Debug node.js code in browser
 - `supervisor --debug server.js`
 - Go to `http://localhost:8080/debug?port=5858`
 
+Node-js Front-end
+-----------------
+
+Templates are in `app/views`
+Assets are in `public/`
+
+Basically the same layout as a Rails project
+
 Front-end prototypes
 --------------------
 

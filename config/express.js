@@ -41,11 +41,22 @@ module.exports = function(app, config, passport) {
     }
 
     // View engine setup
-    app.set('views', config.root + '/app/views');
-    app.set('view engine', 'hjs');
+    app.set('view engine', 'html');
+    app.set('layout', 'layout/layout');
+    app.set('view options', { layout: true });
 
-    app.use(favicon());
-    app.use(require('stylus').middleware(config.root + 'public'));
+    app.set('partials', {
+        header: 'layout/header',
+        footer: 'layout/footer'
+    });
+
+    //app.enable('view cache');
+    app.engine('html', require('hogan-express'));
+
+    app.set('views', config.root + '/app/views');
+
+    //app.use(favicon(config.root + '/public/favicon.ico'));
+    app.use(require('stylus').middleware(config.root + '/public'));
     app.use(express.static(config.root + '/public'));
 
     app.configure(function() {
