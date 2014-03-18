@@ -1,0 +1,33 @@
+<template name="footer_order">
+	<div id="insta-footer">
+		<div class="row" id="insta-footer-buttons">
+			<a href="customize_case">
+				<div class="col-xs-3" id="back-button">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back
+				</div>
+			</a>
+			<div class="col-xs-6">
+				<div id="pay-with-card">
+					<form action="/charge" method="POST">
+					  <script
+					    src="https://checkout.stripe.com/checkout.js"
+					    class="stripe-button"
+					    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+					    data-image="/square-image.png"
+					    data-name="Demo Site"
+					    data-description="2 widgets ($20.00)"
+					    data-amount="2000">
+					  </script>
+					</form>
+				</div>
+			</div>
+			<a href="preview_case">
+			<div class="col-xs-3" id="add-to-cart-button">
+				<span class="glyphicon-plus"></span>
+				<span class="glyphicon glyphicon-shopping-cart"></span>
+				Add to cart
+			</div>
+			</a>
+	</div>
+</template>
