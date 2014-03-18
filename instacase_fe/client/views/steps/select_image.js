@@ -108,9 +108,3 @@ function resizeCanvas(){
 		canvas.renderAll.bind(canvas), 
 		{overlayImageLeft: cwidth, overlayImageTop: cheight});
 };
-
-
-
-
-
-
