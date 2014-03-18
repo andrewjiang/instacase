@@ -23,3 +23,8 @@ Debug node.js code in browser
 - `node-inspector &`
 - `supervisor --debug server.js`
 - Go to `http://localhost:8080/debug?port=5858`
+
+Front-end prototypes
+--------------------
+
+Run with 'mrt' in the instacase_fe folder
