@@ -8,11 +8,22 @@ a:hover{
 /* Interesting Utilities */
 	.thin-font{
 		font-weight: 200;
-		color: #444;
 	}
 	.thin-padding{
 		padding-left: 1px;
 		padding-right: 1px;
+	}
+	.large-button{
+		font-size: 24px;
+		padding: 10px;
+		margin-bottom: 10px;
+		font-weight: 500;
+	}
+	.btn-primary{
+		background-color: #2980b9;
+	}
+	.btn-default{
+		background-color: #FAFBFC;
 	}
 
 	/* Colors CSS */
@@ -168,10 +179,8 @@ a:hover{
 		border: 1px dashed #fff;
 		position: relative;
 	}
-	#upload-icon{
+	.control-icon{
 		position: absolute;
-		top: 10px;
-		left: 10px;
 		font-size: 24px;
 		width: 40px;
 		height: 40px;
@@ -180,13 +189,30 @@ a:hover{
 		text-align: center;
 		border-radius: 6px;
 	}
-	#upload-icon .glyphicon{
+	.control-icon .glyphicon{
 		margin-top: 6px;
 		display: block;
 	}
-	#upload-icon:hover{
+	.control-icon:hover{
 		opacity: 1;
 		cursor: pointer;
+	}
+	.control-icon.inactive{
+		opacity: 0.5;
+	}
+	.control-icon.inactive:hover{
+		opacity: 0.5;
+		background-color: #eee;
+		cursor: not-allowed;
+	}
+
+	#upload-icon{
+		top: 10px;
+		left: 10px;
+	}
+	#remove-icon{
+		top: 60px;
+		left: 10px;
 	}
 	#case-absolute{
 		left: 50%;
@@ -287,6 +313,9 @@ a:hover{
 		height: 72px;
 		color: #FAFBFC;
 		border-top: 1px solid #222;
+	}
+	#insta-footer.non-stick{
+		position: relative;
 	}
 	#insta-footer.expanded{
 		height: 500px;

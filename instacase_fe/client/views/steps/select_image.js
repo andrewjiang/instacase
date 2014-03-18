@@ -68,6 +68,11 @@ Template.select_image.rendered = function(){
 Template.select_image.events({
 	'click #upload-icon': function(event){
 		$('#image-input').click();
+	},
+	'click #remove-icon': function(event){
+		if($('#remove-icon').hasClass("inactive")){
+			alert("yo");
+		};
 	}
 });
 function newUpload(evt) {
