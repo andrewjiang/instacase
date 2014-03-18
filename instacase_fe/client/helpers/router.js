@@ -1,5 +1,6 @@
 Meteor.Router.add({
 	'/': 'home',
 	'/select': 'select_image',
-	'/choose': 'choose_model'
+	'/choose': 'choose_model',
+	'/canvas': 'canvas'
 });
