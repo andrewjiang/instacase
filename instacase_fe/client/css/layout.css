@@ -1,3 +1,13 @@
+a:hover{
+	text-decoration: none;
+}
+.thin-font{
+	font-weight: 200;
+	color: #444;
+}
+
+
+
 /* Colors CSS */
 	.theme1{
 		color: #1B325F;
@@ -36,10 +46,181 @@
 		background-color: #fff;
 	}
 /* End Colors CSS */
+#insta-wrap{
+	min-height: 100%;
+	padding-top: 60px;
+}
+.instacase-brand img{
+	height: 50px;
+}
+#instacase-header{
+	background-color: #FAFBFC;
+	border-bottom: 2px solid #777;
+	border-radius: 0;
+	height: 60px;
+	padding: 4px;
+	margin-bottom: 0;
+	top: 0px;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+}
+.instacase-brand{
+	font-size: 32px;
+	font-family: "Lobster";
+	font-weight: 700;
+	color: #f39c12;
+	-webkit-text-stroke-width: 0.02em;
+   -webkit-text-stroke-color: #f39c12;
+}
+.instacase-brand:hover{
+	color: #e67e22
+}
+.select-model img{
+	height: 140px;
+	display: inline;
+}
+.select-model{
+	margin: auto;
+	display: block;
+	border: 2px solid #ccc;
+	padding: 3px;
+	margin: 3px;
+	font-size: 24px;
+}
+@media (min-width: 768px){
+	.select-model {
+		margin-top: 40px;
+	}
+	.select-model img{
+		height: 250px;
+	}
+}
+.disabled{
+	color: #555 !important;
+}
+
+/* Home */
+	#home-collage{
+		position: relative;
+	}
+	#home-collage img{
+		width: 49.5%;
+		display: inline;
+		margin-bottom: 3px;
+	}
+	@media (min-width: 1000px){
+		#home-collage img{
+			width: 24.5%;
+		}
+	}
+	@media (min-width: 768px) and (max-width: 1000px){
+		#home-collage img{
+			width: 32.5%;
+		}
+	}
+	#home-buttons{
+		margin-top: 40px;
+	}
+	#home-buttons .btn{
+		box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+		max-width: 400px;
+		margin: auto;
+	}
+	#home-buttons a .btn{
+		margin-bottom: 10px;
+	}
+	.overlay{
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0px;
+		opacity: 0.6;
+		background-color: #000;
+
+	}
+	.message-overlay{
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0px;
+		color: #fff;
+		text-align: center;
+		padding-top: 80px;
+	}
+
+/* Select Image */
+	#canvas-container{
+		width: 100%;
+		height: 484px;
+		border: 1px dashed #ccc;
+		position: relative;
+	}
+	#upload-icon{
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		font-size: 24px;
+		width: 40px;
+		height: 40px;
+		background-color: #eee;
+		opacity: 0.8;
+		text-align: center;
+		border-radius: 6px;
+	}
+	#upload-icon .glyphicon{
+		margin-top: 6px;
+		display: block;
+	}
+	#upload-icon:hover{
+		opacity: 1;
+		cursor: pointer;
+	}
+	#case-inner-border{
+		width: 210px;
+		height: 420px;
+		border: 2px dashed #34495e;
+		border-radius: 20px;
+		margin: auto;
+		margin-top: 20px;
+	}
+	#case-outer-border{
+		width: 254px;
+		height: 464px;
+		border: 2px dashed #7f8c8d;
+		border-radius: 36px;
+		margin: auto;
+		margin-top: 10px;
+	}
+
+
+
+/* Header */
+	#instacase-collapse .navbar-nav{
+		margin-left: 20px;
+	}
+	.navbar-nav li.active a{
+		background-color: transparent !important;
+		border-top: 3px solid #3498db;
+	}
+	.navbar-nav li a:hover{
+		background-color: transparent !important;
+		border-top: 3px solid #3498db;
+	}
+
+	.navbar-nav li a{
+		border-top: 3px solid #FAFBFc;
+		padding-left: 4px;
+		padding-right: 4px;
+		margin: -4px 6px 0px 6px;
+	}
+
+
+
 
 /* Layouts CSS */
 	body{
-		background-color: #FAFBFC;
+		background-color: #FFF;
 	}
 	#phone-wrapper{
 		background-image: url('images/iphone-div.png');
@@ -87,11 +268,16 @@
 		border-radius: 4px;
 	}
 	#insta-footer{
-		position: absolute;
+		position: fixed;
 		bottom: 0px;
-		background-color: #111;
+		background-color: #333;
 		width: 100%;
 		height: 72px;
+		color: #FAFBFC;
+		border-top: 1px solid #222;
+	}
+	#insta-footer.expanded{
+		height: 500px;
 	}
 	#insta-footer-buttons{
 		margin-left: 0px;
@@ -104,11 +290,33 @@
 		font-size: 12px;
 		text-align: center;
 		position: relative;
+		background-color: #222;
 	}
 	#insta-footer-buttons .col-xs-3 .glyphicon{
 		font-size: 28px;
 		display: block;
 		padding: 10px;
+	}
+	#insta-footer-buttons .col-xs-3.selected{
+		background-color: #333;
+	}
+	#footer-company{
+		padding-top: 10px;
+		text-align: center;
+		font-weight: 300;
+		color: #777;
+	}
+	#footer-company{
+		padding-top: 10px;
+		text-align: center;
+		font-weight: 300;
+		color: #777;
+	}
+	#footer-company a{
+		color: #777;
+	}
+	#footer-company a:hover{
+		color: #aaa;
 	}
 	#add-to-cart-button .glyphicon-plus{
 		font-size: 18px;
@@ -415,3 +623,9 @@
 		
 	}
 /* End StepThree CSS */
+
+@media (max-width: 768px){
+	.hidden-on-mobile{
+		display: none;
+	}
+}
