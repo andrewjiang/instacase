@@ -21,3 +21,4 @@ build/Release
 
 # Vim temp files
 *.swp
+/node_modules/mongodb

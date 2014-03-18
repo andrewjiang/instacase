@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+
+{{#user}}
+<p>Hello, {{displayName}}!</p>
+<a href="/logout">Logout</a>
+{{/user}}
+{{^user}}
+<a href="/auth/facebook">Login with Facebook!</a>
+{{/user}}
+
+<p><a href="/cases/create">Make a case, bro</a></p>

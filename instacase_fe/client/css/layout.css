@@ -1,51 +1,61 @@
+/* Overall Stuff */
+
 a:hover{
 	text-decoration: none;
 }
-.thin-font{
-	font-weight: 200;
-	color: #444;
-}
+
+/* Interesting Utilities */
+	.thin-font{
+		font-weight: 200;
+		color: #444;
+	}
+	.thin-padding{
+		padding-left: 1px;
+		padding-right: 1px;
+	}
+
+	/* Colors CSS */
+		.theme1{
+			color: #1B325F;
+		}
+		.theme2{
+			color: #9CC4E4;
+		}
+		.theme3{
+			color: #E9F2F9;
+		}
+		.theme4{
+			color: #3A89C9;
+		}
+		.theme5{
+			color: #F26C4F;
+		}
+		.flatgreen{
+			color: #27ae60;
+		}
+		.flatred{
+			color: #e74c3c;
+		}
+		.flatorange{
+			color: #f39c12;
+		}
+		.flatblue{
+			color: #2980b9;
+		}
+		.darkgray{
+			color: #555;
+		}
+		.lightgray{
+			color: #999;
+		}
+		.white-bkg{
+			background-color: #fff;
+		}
+	/* End Colors CSS */
+/* End Interesting Utilities */
 
 
 
-/* Colors CSS */
-	.theme1{
-		color: #1B325F;
-	}
-	.theme2{
-		color: #9CC4E4;
-	}
-	.theme3{
-		color: #E9F2F9;
-	}
-	.theme4{
-		color: #3A89C9;
-	}
-	.theme5{
-		color: #F26C4F;
-	}
-	.flatgreen{
-		color: #27ae60;
-	}
-	.flatred{
-		color: #e74c3c;
-	}
-	.flatorange{
-		color: #f39c12;
-	}
-	.flatblue{
-		color: #2980b9;
-	}
-	.darkgray{
-		color: #555;
-	}
-	.lightgray{
-		color: #999;
-	}
-	.white-bkg{
-		background-color: #fff;
-	}
-/* End Colors CSS */
 
 #insta-wrap{
 	min-height: 100%;
@@ -153,7 +163,7 @@ a:hover{
 /* Select Image */
 	#canvas-container{
 		width: 100%;
-		height: 484px;
+		min-height: 484px;
 		border: 1px dashed #fff;
 		position: relative;
 	}
@@ -199,8 +209,6 @@ a:hover{
 		left: -50%;
 	}
 
-
-
 /* Header */
 	#instacase-collapse .navbar-nav{
 		margin-left: 20px;
@@ -220,9 +228,6 @@ a:hover{
 		padding-right: 4px;
 		margin: -4px 6px 0px 6px;
 	}
-
-
-
 
 /* Layouts CSS */
 	body{
@@ -351,7 +356,6 @@ a:hover{
 	#preview-button{
 		color: #16a085;
 	}
-
 /* End Layouts CSS */
 
 /* Welcome Page CSS */

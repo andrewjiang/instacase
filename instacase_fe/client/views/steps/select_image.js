@@ -1,9 +1,14 @@
 Template.select_image.rendered = function(){
 	document.getElementById('image-input').addEventListener('change', newUpload, false);
-  
+  window.onresize = resizeCanvas;
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
-  canvas.setHeight($('#canvas-container').height());
+  var canvasHeight = $(window).height()-$('#insta-footer').height()-$('#instacase-header').height()-14
+  if (canvasHeight > 484){
+  	canvas.setHeight(canvasHeight);
+  } else {
+  	canvas.setHeight(484);
+  }
 	canvas.setWidth($('#canvas-container').width());
 
   // Create a text object. 
@@ -38,14 +43,12 @@ Template.select_image.rendered = function(){
 	  selectable: true
 	});*/
 
-	var cwidth = canvas.getWidth() / 2 - 500;
+	var cwidth = canvas.getWidth() / 2 - 1000;
 	var cheight = canvas.getHeight() / 2 - 500;
-	var iwidth =  canvas.getWidth() / 2 
-	var iheight	= canvas.getHeight() / 2 
 
-  fabric.Image.fromURL('http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg', function(oImg) {
+  /*fabric.Image.fromURL('http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg', function(oImg) {
 	  canvas.add(oImg), {left: iwidth, top: iheight}
-	});
+	});*/
 
 	canvas.setOverlayImage('/images/overlay.png', 
 		canvas.renderAll.bind(canvas), 
@@ -59,7 +62,7 @@ Template.select_image.rendered = function(){
 
   //canvas.add(rect2);
   //canvas.add(rect);
-  canvas.sendBackward(oImg);
+  //canvas.sendBackward(oImg);
         
 };
 Template.select_image.events({
@@ -68,8 +71,46 @@ Template.select_image.events({
 	}
 });
 function newUpload(evt) {
-	URL = 'http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg'
+	/*URL = 'http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg'
   fabric.Image.fromURL(URL, function(oImg) {
 	  canvas.add(oImg), {left: 100, top: 100}
-	});
-}
+	});*/
+	var reader = new FileReader();
+	reader.onload = function(event) { console.log ('loading reader');
+		var imgObj = new Image()
+		imgObj.src = event.target.result;
+		imgObj.onload = function(){
+			// start fabricJS stuff
+
+			var image = new fabric.Image(imgObj);
+			image.set({
+				left: 150,
+				top: 150,
+				padding: 10,
+				cornersize: 10
+			});
+
+			canvas.add(image);
+		}
+
+	}
+	reader.readAsDataURL(evt.target.files[0]);
+	
+};
+function resizeCanvas(){
+	canvas.setHeight($('#canvas-container').height());
+	canvas.setWidth($('#canvas-container').width());
+	canvas.overlayImage = null;
+	canvas.renderAll.bind(canvas);
+	var cwidth = canvas.getWidth() / 2 - 1000;
+	var cheight = canvas.getHeight() / 2 - 500;
+	canvas.setOverlayImage('/images/overlay.png', 
+		canvas.renderAll.bind(canvas), 
+		{overlayImageLeft: cwidth, overlayImageTop: cheight});
+};
+
+
+
+
+
+
