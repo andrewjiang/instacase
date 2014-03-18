@@ -1,6 +1,5 @@
 /*
-  TODO: use this layout: https://github.com/madhums/node-express-mongoose-demo
-  TODO: break out config into config files etc
+  Based on https://github.com/madhums/node-express-mongoose-demo
 */
 
 // Imports
