@@ -9,6 +9,9 @@ module.exports = function(app, passport) {
     // Home
     app.get('/', cases.index);
 
+    // Create a new case
+    app.get('/cases/create', cases.create);
+
     app.get('/login', users.login);
     app.get('/logout', users.logout);
 
