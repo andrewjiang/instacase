@@ -3,7 +3,7 @@ Template.select_image.rendered = function(){
   window.onresize = resizeCanvas;
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
-  var canvasHeight = $(window).height()-$('#insta-footer').height()-$('#instacase-header').height()-14
+  var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
   	canvas.setHeight(canvasHeight);
   } else {
