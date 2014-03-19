@@ -199,11 +199,13 @@ a:hover{
 	}
 	.control-icon.inactive{
 		opacity: 0.5;
+		color: #000 !important;
 	}
 	.control-icon.inactive:hover{
 		opacity: 0.5;
 		background-color: #eee;
 		cursor: not-allowed;
+		color: #000 !important;
 	}
 
 	#upload-icon{
@@ -213,6 +215,7 @@ a:hover{
 	#remove-icon{
 		top: 60px;
 		left: 10px;
+		color: red;
 	}
 	#case-absolute{
 		left: 50%;

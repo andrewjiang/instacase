@@ -1,8 +1,21 @@
 Template.select_image.rendered = function(){
 	document.getElementById('image-input').addEventListener('change', newUpload, false);
+  
+
+if(jQuery.browser.mobile) {
+ 	window.OverlayImg = '/images/overlay_m.png';
+ 	window.isMobile = true;
+} else {
+	window.OverlayImg = '/images/overlay.png';
+	window.isMobile = false;
+};
+
+
   window.onresize = resizeCanvas;
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
+
+
   var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
   	canvas.setHeight(canvasHeight);
@@ -43,14 +56,22 @@ Template.select_image.rendered = function(){
 	  selectable: true
 	});*/
 
-	var cwidth = canvas.getWidth() / 2 - 1000;
-	var cheight = canvas.getHeight() / 2 - 500;
+	if (isMobile){
+		var cwidth = canvas.getWidth() / 2 - 960;
+		var cheight = canvas.getHeight() / 2 - 540;
+	} else {
+		var cwidth = canvas.getWidth() / 2 - 1000;
+		var cheight = canvas.getHeight() / 2 - 500;
+	}
+	
 
   /*fabric.Image.fromURL('http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg', function(oImg) {
 	  canvas.add(oImg), {left: iwidth, top: iheight}
 	});*/
-
-	canvas.setOverlayImage('/images/overlay.png', 
+	
+	
+	
+	canvas.setOverlayImage(OverlayImg, 
 		canvas.renderAll.bind(canvas), 
 		{overlayImageLeft: cwidth, overlayImageTop: cheight});
 	
@@ -63,7 +84,12 @@ Template.select_image.rendered = function(){
   //canvas.add(rect2);
   //canvas.add(rect);
   //canvas.sendBackward(oImg);
-        
+  canvas.on('object:selected', function(options) {
+	  $('#remove-icon').removeClass("inactive");
+	});
+	canvas.on('selection:cleared', function(options) {
+	  $('#remove-icon').addClass("inactive");
+	});
 };
 Template.select_image.events({
 	'click #upload-icon': function(event){
@@ -71,7 +97,9 @@ Template.select_image.events({
 	},
 	'click #remove-icon': function(event){
 		if($('#remove-icon').hasClass("inactive")){
-			alert("yo");
+			
+		} else {
+			canvas.remove(canvas.getActiveObject());
 		};
 	}
 });
@@ -89,27 +117,40 @@ function newUpload(evt) {
 
 			var image = new fabric.Image(imgObj);
 			image.set({
-				left: 150,
-				top: 150,
-				padding: 10,
-				cornersize: 10
+				originX: 'center',
+				originY: 'center',
+				left: 0,
+				top: 0,
 			});
-
+			image.set({
+				scaleY: canvas.width / (image.width * 1.5),
+    		scaleX: canvas.width / (image.width * 1.5),
+			});			
 			canvas.add(image);
-		}
 
+			image.center();
+			image.setCoords();
+			canvas.setActiveObject(image);
+		
+		}
+	$("#image-input").val('');
 	}
 	reader.readAsDataURL(evt.target.files[0]);
 	
 };
 function resizeCanvas(){
-	canvas.setHeight($('#canvas-container').height());
+	var canvasHeight = $(window).height()-$('#instacase-header').height()-14
+  if (canvasHeight > 484){
+  	canvas.setHeight(canvasHeight);
+  } else {
+  	canvas.setHeight(484);
+  }
 	canvas.setWidth($('#canvas-container').width());
 	canvas.overlayImage = null;
 	canvas.renderAll.bind(canvas);
 	var cwidth = canvas.getWidth() / 2 - 1000;
 	var cheight = canvas.getHeight() / 2 - 500;
-	canvas.setOverlayImage('/images/overlay.png', 
+	canvas.setOverlayImage(OverlayImg, 
 		canvas.renderAll.bind(canvas), 
 		{overlayImageLeft: cwidth, overlayImageTop: cheight});
 };
