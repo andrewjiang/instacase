@@ -92,11 +92,11 @@ Template.select_image.rendered = function(){
 
 	  var obj = canvas.getActiveObject();
 
-	  
+
 
 	});
 	canvas.on('object:moving', function(options) {
-	  var obj = canvas.getActiveObject();
+	  /*var obj = canvas.getActiveObject();
 
 	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
 		var cCenTop = (canvas.getHeight() + 0.0) / 2;
@@ -105,7 +105,7 @@ Template.select_image.rendered = function(){
 
 		obj.offLeft = offL;
 		obj.offTop = offT;
-		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
 
 	});
 	canvas.on('selection:cleared', function(options) {
@@ -133,12 +133,12 @@ Template.select_image.events({
 		var text = new fabric.Text('hello world', { left: cCenLeft, top: cCenTop });
 		canvas.add(text);
 
-		var offL = text.left - cCenLeft;
+		/*var offL = text.left - cCenLeft;
 		var offT = text.top - cCenTop; 
 
 		text.offLeft = offL;
 		text.offTop = offT;
-		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
 
 	}
 });
@@ -202,7 +202,7 @@ function resizeCanvas(){
 	var cCenterTop = cHeight / 2;
 	var cCenterLeft = cWidth / 2;
 
-	objects = JSON.parse(JSON.stringify(canvas));
+	/*objects = JSON.parse(JSON.stringify(canvas));
 
 	for (var i=0; i <= objects.objects.length-1; i++){
 		var nTop = cCenterTop + canvas.item(i).offTop;
@@ -214,7 +214,7 @@ function resizeCanvas(){
 		});
 	};
 
-	json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+	json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
 	
 
 	canvas.setOverlayImage(OverlayImg, 
