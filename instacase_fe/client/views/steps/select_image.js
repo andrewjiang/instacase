@@ -1,19 +1,20 @@
 Template.select_image.rendered = function(){
 	document.getElementById('image-input').addEventListener('change', newUpload, false);
-  
 
-if(jQuery.browser.mobile) {
- 	window.OverlayImg = '/images/overlay_m.png';
- 	window.isMobile = true;
-} else {
-	window.OverlayImg = '/images/overlay.png';
-	window.isMobile = false;
-};
+
+	if(jQuery.browser.mobile) {
+	 	window.OverlayImg = '/images/overlay_m.png';
+	 	window.isMobile = true;
+	} else {
+		window.OverlayImg = '/images/overlay.png';
+		window.isMobile = false;
+	};
 
 
   window.onresize = resizeCanvas;
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
+  window.json = JSON.stringify(canvas.toJSON());
 
 
   var canvasHeight = $(window).height()-$('#instacase-header').height()-14
@@ -87,6 +88,19 @@ if(jQuery.browser.mobile) {
   canvas.on('object:selected', function(options) {
 	  $('#remove-icon').removeClass("inactive");
 	});
+	canvas.on('object:moving', function(options) {
+	  var obj = canvas.getActiveObject();
+
+	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
+		var cCenTop = (canvas.getHeight() + 0.0) / 2;
+		var offL = obj.left - cCenLeft;
+		var offT = obj.top - cCenTop; 
+
+		obj.offLeft = offL;
+		obj.offTop = offT;
+		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+
+	});
 	canvas.on('selection:cleared', function(options) {
 	  $('#remove-icon').addClass("inactive");
 	});
@@ -121,13 +135,14 @@ function newUpload(evt) {
 				originY: 'center',
 				left: 0,
 				top: 0,
+				offLeft: 0,
+				offTop: 0
 			});
 			image.set({
-				scaleY: canvas.width / (image.width * 1.5),
-    		scaleX: canvas.width / (image.width * 1.5),
+				scaleY: 260 / (image.width),
+    		scaleX: 260/ (image.width),
 			});			
 			canvas.add(image);
-
 			image.center();
 			image.setCoords();
 			canvas.setActiveObject(image);
@@ -139,6 +154,8 @@ function newUpload(evt) {
 	
 };
 function resizeCanvas(){
+	canvas.loadFromJSON(json);
+	//resetting size of Canvas
 	var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
   	canvas.setHeight(canvasHeight);
@@ -146,11 +163,36 @@ function resizeCanvas(){
   	canvas.setHeight(484);
   }
 	canvas.setWidth($('#canvas-container').width());
+
+	//setting OverLay Image
 	canvas.overlayImage = null;
-	canvas.renderAll.bind(canvas);
-	var cwidth = canvas.getWidth() / 2 - 1000;
-	var cheight = canvas.getHeight() / 2 - 500;
+
+
+	//set Canvas Height and Width
+	var cWidth = canvas.getWidth() + 0.0;
+	var cHeight = canvas.getHeight() + 0.0;
+	var oWidth = cWidth / 2 - 1000;
+	var oHeight = cHeight / 2 - 500;
+	var cCenterTop = cHeight / 2;
+	var cCenterLeft = cWidth / 2;
+
 	canvas.setOverlayImage(OverlayImg, 
 		canvas.renderAll.bind(canvas), 
-		{overlayImageLeft: cwidth, overlayImageTop: cheight});
+		{overlayImageLeft: oWidth, overlayImageTop: oHeight});
+
+	objects = JSON.parse(JSON.stringify(canvas));
+
+	for (var i=0; i <= objects.objects.length-1; i++){
+		var nTop = cCenterTop + canvas.item(i).offTop;
+		var nLeft = cCenterLeft + canvas.item(i).offLeft;
+
+		canvas.item(i).set({
+			top: nTop,
+			left: nLeft,
+		});
+	};
+
+	json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+	canvas.renderAll.bind(canvas);
+
 };
