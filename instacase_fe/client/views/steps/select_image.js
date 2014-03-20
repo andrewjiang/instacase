@@ -16,6 +16,8 @@ Template.select_image.rendered = function(){
   window.canvas = new fabric.Canvas('insta-canvas');
   window.json = JSON.stringify(canvas.toJSON());
 
+  window.cWidth = canvas.getWidth() + 0.0;
+	window.cHeight = canvas.getHeight() + 0.0;
 
   var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
@@ -87,6 +89,11 @@ Template.select_image.rendered = function(){
   //canvas.sendBackward(oImg);
   canvas.on('object:selected', function(options) {
 	  $('#remove-icon').removeClass("inactive");
+
+	  var obj = canvas.getActiveObject();
+
+	  
+
 	});
 	canvas.on('object:moving', function(options) {
 	  var obj = canvas.getActiveObject();
@@ -105,6 +112,7 @@ Template.select_image.rendered = function(){
 	  $('#remove-icon').addClass("inactive");
 	});
 };
+
 Template.select_image.events({
 	'click #upload-icon': function(event){
 		$('#image-input').click();
@@ -115,8 +123,26 @@ Template.select_image.events({
 		} else {
 			canvas.remove(canvas.getActiveObject());
 		};
+	},
+	'click #text-icon': function(event){
+		
+
+	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
+		var cCenTop = (canvas.getHeight() + 0.0) / 2;
+
+		var text = new fabric.Text('hello world', { left: cCenLeft, top: cCenTop });
+		canvas.add(text);
+
+		var offL = text.left - cCenLeft;
+		var offT = text.top - cCenTop; 
+
+		text.offLeft = offL;
+		text.offTop = offT;
+		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
+
 	}
 });
+
 function newUpload(evt) {
 	/*URL = 'http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg'
   fabric.Image.fromURL(URL, function(oImg) {
@@ -169,16 +195,12 @@ function resizeCanvas(){
 
 
 	//set Canvas Height and Width
-	var cWidth = canvas.getWidth() + 0.0;
-	var cHeight = canvas.getHeight() + 0.0;
+	cWidth = canvas.getWidth() + 0.0;
+	cHeight = canvas.getHeight() + 0.0;
 	var oWidth = cWidth / 2 - 1000;
 	var oHeight = cHeight / 2 - 500;
 	var cCenterTop = cHeight / 2;
 	var cCenterLeft = cWidth / 2;
-
-	canvas.setOverlayImage(OverlayImg, 
-		canvas.renderAll.bind(canvas), 
-		{overlayImageLeft: oWidth, overlayImageTop: oHeight});
 
 	objects = JSON.parse(JSON.stringify(canvas));
 
@@ -193,6 +215,10 @@ function resizeCanvas(){
 	};
 
 	json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));
-	canvas.renderAll.bind(canvas);
+	
+
+	canvas.setOverlayImage(OverlayImg, 
+		canvas.renderAll.bind(canvas), 
+		{overlayImageLeft: oWidth, overlayImageTop: oHeight});
 
 };

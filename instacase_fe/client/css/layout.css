@@ -198,14 +198,14 @@ a:hover{
 		cursor: pointer;
 	}
 	.control-icon.inactive{
-		opacity: 0.5;
-		color: #000 !important;
+		opacity: 0.3;
+		color: #111 !important;
 	}
 	.control-icon.inactive:hover{
-		opacity: 0.5;
+		opacity: 0.3;
 		background-color: #eee;
 		cursor: not-allowed;
-		color: #000 !important;
+		color: #111 !important;
 	}
 
 	#upload-icon{
@@ -216,6 +216,10 @@ a:hover{
 		top: 60px;
 		left: 10px;
 		color: red;
+	}
+	#text-icon{
+		top: 110px;
+		left: 10px;
 	}
 	#case-absolute{
 		left: 50%;
