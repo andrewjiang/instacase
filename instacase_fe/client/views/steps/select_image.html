@@ -1,15 +1,66 @@
 <template name="select_image">
+	
 	<div class="container-fluid thin-padding">
 		<div id="canvas-container">
 			<canvas id="insta-canvas"></canvas>
 			<div class="control-icon" id="upload-icon">
 				<span class="glyphicon glyphicon-upload"></span>
 			</div>
-			<div class="control-icon inactive" id="remove-icon">
-				<span class="glyphicon glyphicon-remove"></span>
-			</div>
 			<div class="control-icon" id="text-icon">
 				<span class="glyphicon glyphicon-font"></span>
+			</div>
+			<div class="control-icon" id="clipart-icon">
+				<span class="glyphicon glyphicon-heart-empty"></span>
+			</div>
+			<div class="control-icon" id="background-icon">
+				<span class="glyphicon glyphicon-adjust"></span>
+			</div>
+			<div class="control-icon" id="cart-icon">
+				<span class="glyphicon glyphicon-shopping-cart"></span>
+			</div>
+			<div class="hidden" id="text-box">
+				<div class="object-icon" id="text-remove-icon">
+					<span class="glyphicon glyphicon-remove"></span>
+				</div>
+				<div class="object-icon" id="edit-icon">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</div>
+				<div class="object-icon" id="copy-icon">
+					<span class="glyphicon glyphicon-repeat"></span>
+				</div>
+			</div>
+			<div class="hidden" id="image-box">
+				<div class="object-icon" id="img-remove-icon">
+					<span class="glyphicon glyphicon-remove"></span>
+				</div>
+			</div>
+			<div class="hidden" id="font-box">
+				<div class="row">
+					<div class="col-md-12">
+						<textarea rows="1" class="form-control" id="font-textarea"></textarea>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<select id="font-selector" class="form-control"><option>Font</option></select>
+					</div>
+					<div class="col-xs-6"> 
+						<button id="align-left">Left</button>
+						<button id="align-center">Center</button>
+						<button id="align-right">Right</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						Color:
+					</div>
+					<div class="col-xs-8">
+						<input id="color-selector" class="color form-control"/>
+
+					</div>
+				</div>
+				</div>
 			</div>
 			<input type='file' name="files[]" class="hidden" id="image-input" multiple/>
 		</div>

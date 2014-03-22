@@ -88,14 +88,43 @@ Template.select_image.rendered = function(){
   //canvas.add(rect);
   //canvas.sendBackward(oImg);
   canvas.on('object:selected', function(options) {
-	  $('#remove-icon').removeClass("inactive");
-
 	  var obj = canvas.getActiveObject();
+	  try{
+	  	switch(obj.type)
+		  {
+		  	case "image":
+		  	  $('#image-box').removeClass("hidden");
+		  	  break;
+		  	case "text":
+		  	  $('#text-box').removeClass("hidden");
+		  	  $('#font-box').removeClass("hidden");
 
+		  	  break;
+		  	default:
+		  		$('#image-box').removeClass("hidden");
+		  	  break;
+		  };
+	  }
+	  catch(err){}
+	  
+	  
+	  moveButtons();
 
+	});
+	canvas.on('object:rotating', function(options) {
+	  
+	  moveButtons();
+
+	});
+	canvas.on('object:modified', function(options) {
+	  
+	  moveButtons();
 
 	});
 	canvas.on('object:moving', function(options) {
+
+		moveButtons();
+
 	  /*var obj = canvas.getActiveObject();
 
 	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
@@ -109,7 +138,14 @@ Template.select_image.rendered = function(){
 
 	});
 	canvas.on('selection:cleared', function(options) {
-	  $('#remove-icon').addClass("inactive");
+	  var obj = canvas.getActiveObject();
+
+	  $('#image-box').addClass("hidden");
+	  
+	  $('#text-box').addClass("hidden");
+	  $('#font-box').addClass("hidden");
+
+	  
 	});
 };
 
@@ -117,12 +153,21 @@ Template.select_image.events({
 	'click #upload-icon': function(event){
 		$('#image-input').click();
 	},
-	'click #remove-icon': function(event){
-		if($('#remove-icon').hasClass("inactive")){
-			
-		} else {
-			canvas.remove(canvas.getActiveObject());
-		};
+	'click #text-remove-icon': function(event){
+		canvas.remove(canvas.getActiveObject());
+	},
+	'click #img-remove-icon': function(event){
+		canvas.remove(canvas.getActiveObject());
+	},
+	'click #copy-icon': function(event){
+		var obj = canvas.getActiveObject();
+		var clone = obj.clone();
+		canvas.add(clone);
+		clone.set({
+			top: obj.top + 5,
+			left: obj.left + 5,
+		})
+		canvas.renderAll();
 	},
 	'click #text-icon': function(event){
 		
@@ -130,8 +175,26 @@ Template.select_image.events({
 	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
 		var cCenTop = (canvas.getHeight() + 0.0) / 2;
 
-		var text = new fabric.Text('hello world', { left: cCenLeft, top: cCenTop });
+		var newText = window.prompt("Your text","");
+
+		var text = new fabric.Text(newText, { left: cCenLeft, top: cCenTop });
+		canvas.setActiveObject(text);
 		canvas.add(text);
+
+	},
+	'click #edit-icon': function(event){
+		
+		var obj = canvas.getActiveObject(); 
+
+	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
+		var cCenTop = (canvas.getHeight() + 0.0) / 2;
+
+		var newText = window.prompt("Your text","");
+
+		var text = new fabric.Text(newText, { left: cCenLeft, top: cCenTop });
+		canvas.setActiveObject(text);
+		canvas.add(text);
+
 
 		/*var offL = text.left - cCenLeft;
 		var offT = text.top - cCenTop; 
@@ -141,6 +204,7 @@ Template.select_image.events({
 		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
 
 	}
+
 });
 
 function newUpload(evt) {
@@ -178,6 +242,47 @@ function newUpload(evt) {
 	}
 	reader.readAsDataURL(evt.target.files[0]);
 	
+};
+function moveButtons(){
+	var obj = canvas.getActiveObject();
+	var	rX = (obj.currentWidth / 2)
+	var	rY = (obj.currentHeight / 2)
+	var X = obj.left - rX;
+	var Y = obj.top - rY;
+	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 20;
+	var theta = ((obj.angle) * Math.PI / 180) + Math.atan(rY/rX);
+
+  var IconX = obj.left - r * Math.cos(theta) - 12;
+  var IconY = obj.top - r * Math.sin(theta) - 34;
+
+	try{
+		switch(obj.type)
+	  {
+	  	case "image":
+	  	  $('#image-box').css("left", IconX);
+		  	$('#image-box').css("top", IconY);
+		  	$('#image-box').css("transform", "rotate(" + obj.angle + "deg)");
+	  	  break;
+	  	case "text":
+	  	  $('#text-box').css("left", IconX);
+		  	$('#text-box').css("top", IconY);
+		  	$('#text-box').css("transform", "rotate(" + obj.angle + "deg)");
+	  	  break;
+	  	default:
+	  		$('#text-box').css("left", IconX);
+		  	$('#text-box').css("top", IconY);
+		  	$('#text-box').css("transform", "rotate(" + obj.angle + "deg)");
+	  	  break;
+	  };
+	}
+	catch(err){
+		$('#text-box').css("left", IconX);
+  	$('#text-box').css("top", IconY);
+  	$('#text-box').css("transform", "rotate(" + obj.angle + "deg)");
+	}
+ 
+
+  console.log(obj);
 };
 function resizeCanvas(){
 	canvas.loadFromJSON(json);

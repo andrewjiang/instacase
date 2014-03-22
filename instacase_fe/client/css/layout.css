@@ -172,6 +172,15 @@ a:hover{
 		padding-top: 80px;
 	}
 
+/* Choose Phone */
+	
+	@media (min-width: 768px){
+		.insta-title{
+			padding: 20px;
+			font-size: 38px;
+		}
+	}
+
 /* Select Image */
 	#canvas-container{
 		width: 100%;
@@ -212,13 +221,59 @@ a:hover{
 		top: 10px;
 		left: 10px;
 	}
-	#remove-icon{
-		top: 60px;
-		left: 10px;
-		color: red;
+	#text-box{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#image-box{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#font-box{
+		position: absolute;
+		top: 50%;
+		height: 50%;
+		background-color: #222;
+		width: 100%;
+		padding: 20px;
+	}
+	#font-box .row{
+		margin-bottom: 10px;
+	}
+	#font-box #font-textarea{
+		height: 40px;
+	}
+	.object-icon{
+		position: relative;
+		text-align: center;
+		color: #fff;
+		height: 20px;
+		width: 20px;
+		background-color: #111;
+		font-size: 16px;
+		opacity: 0.9;
+		border-radius: 12px;
+		margin: 2px;
+	}
+	.object-icon .glyphicon{
+		margin: 0px;
 	}
 	#text-icon{
+		top: 60px;
+		left: 10px;
+	}
+	#clipart-icon{
 		top: 110px;
+		left: 10px;
+	}
+	#background-icon{
+		top: 160px;
+		left: 10px;
+	}
+	#cart-icon{
+		top: 210px;
 		left: 10px;
 	}
 	#case-absolute{
@@ -314,7 +369,6 @@ a:hover{
 	}
 	#insta-footer{
 		position: fixed;
-		bottom: 0px;
 		background-color: #333;
 		width: 100%;
 		height: 72px;
@@ -347,6 +401,12 @@ a:hover{
 	}
 	#insta-footer-buttons .col-xs-3.selected{
 		background-color: #333;
+	}
+	@media (min-width: 768px){
+		#insta-footer{
+			position: absolute !important;
+			bottom: 0px;
+		}
 	}
 	#footer-company{
 		padding-top: 10px;
