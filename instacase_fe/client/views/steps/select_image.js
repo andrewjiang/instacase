@@ -98,7 +98,7 @@ Template.select_image.rendered = function(){
 		  	case "text":
 		  	  $('#text-box').removeClass("hidden");
 		  	  $('#font-box').removeClass("hidden");
-
+		  	  getFontInfo();
 		  	  break;
 		  	default:
 		  		$('#image-box').removeClass("hidden");
@@ -203,8 +203,7 @@ Template.select_image.events({
 		text.offTop = offT;
 		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
 
-	}
-
+	},
 });
 
 function newUpload(evt) {
@@ -326,4 +325,24 @@ function resizeCanvas(){
 		canvas.renderAll.bind(canvas), 
 		{overlayImageLeft: oWidth, overlayImageTop: oHeight});
 
+};
+function getFontInfo(){
+	var obj = canvas.getActiveObject();
+	var font = obj.fontFamily;
+	var text = obj.text;
+	var text = obj.text;
+	$('#font-selector').val(font);
+	$('#font-textarea').val(text);
+	var color = obj.fill.match(/\((\d+),(\d+),(\d+)\)/);
+	$('#color-selector').val(rgbToHex(color[1], color[2], color[3]));
+};
+function rgbToHex(R,G,B) {
+	return toHex(R)+toHex(G)+toHex(B)
+};
+function toHex(n) {
+ n = parseInt(n,10);
+ if (isNaN(n)) return "00";
+ n = Math.max(0,Math.min(n,255));
+ return "0123456789ABCDEF".charAt((n-n%16)/16)
+      + "0123456789ABCDEF".charAt(n%16);
 };
