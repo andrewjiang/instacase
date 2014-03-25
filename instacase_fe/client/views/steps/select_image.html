@@ -3,67 +3,150 @@
 	<div class="container-fluid thin-padding">
 		<div id="canvas-container">
 			<canvas id="insta-canvas"></canvas>
-			<div class="control-icon" id="upload-icon">
-				<span class="glyphicon glyphicon-upload"></span>
+			<div class="hidden" id="outside-edge">
 			</div>
-			<div class="control-icon" id="text-icon">
-				<span class="glyphicon glyphicon-font"></span>
+			<div class="" id="outside-border">
 			</div>
-			<div class="control-icon" id="clipart-icon">
-				<span class="glyphicon glyphicon-heart-empty"></span>
+			<div class="" id="inside-border">
 			</div>
-			<div class="control-icon" id="background-icon">
-				<span class="glyphicon glyphicon-adjust"></span>
+
+
+			<div id="control-box">
+				<div class="control-icon" id="upload-icon">
+					<span class="glyphicon glyphicon-upload"></span>
+					<div class="hidden-on-mobile control-label">Upload Image</div>
+				</div>
+				<div class="control-icon" id="text-icon">
+					<span class="glyphicon glyphicon-font"></span>
+					<div class="hidden-on-mobile control-label">Add Text</div>
+				</div>
+				<div class="control-icon" id="clipart-icon">
+					<span class="glyphicon glyphicon-heart-empty"></span>
+					<div class="hidden-on-mobile control-label">Add Clipart</div>
+				</div>
+				<div class="control-icon" id="background-icon">
+					<span class="glyphicon glyphicon-adjust"></span>
+					<div class="hidden-on-mobile control-label">Background Color</div>
+				</div>
+				<div class="control-icon" id="cart-icon">
+					<span class="glyphicon glyphicon-shopping-cart"></span>
+					<div class="hidden-on-mobile control-label">Checkout</div>
+				</div>
 			</div>
-			<div class="control-icon" id="cart-icon">
-				<span class="glyphicon glyphicon-shopping-cart"></span>
-			</div>
-			<div class="hidden" id="text-box">
+			<div class="hidden" id="options-box">
 				<div class="object-icon" id="text-remove-icon">
 					<span class="glyphicon glyphicon-remove"></span>
 				</div>
-				<div class="object-icon" id="edit-icon">
-					<span class="glyphicon glyphicon-pencil"></span>
+				<div class="hidden object-icon" id="move-up-icon">
+					<span class="glyphicon glyphicon-arrow-up"></span>
 				</div>
-				<div class="object-icon" id="copy-icon">
-					<span class="glyphicon glyphicon-repeat"></span>
+				<div class="hidden object-icon" id="move-down-icon">
+					<span class="glyphicon glyphicon-arrow-down"></span>
 				</div>
 			</div>
-			<div class="hidden" id="image-box">
-				<div class="object-icon" id="img-remove-icon">
+			<div class="command-box" id="order-box">
+				<form role="form">
+					<h2>Current order</h2>
+						<div class="col-sm-4 hidden-on-mobile">
+					  	<label for="order-quantity" class="hidden-on-mobile">Quantity</label>
+					  	<label for="order-quantity" class="hidden-on-web">#</label>
+					  </div>
+					  <div class="col-sm-8 col-xs-2">
+					   	<input type="text" class="form-control" id="order-quantity" placeholder="1" value="1">
+					  </div>
+				    <div class="col-sm-4 hidden-on-mobile">
+					    <label for="order-color">Case</label>
+					  </div>
+					  <div class="col-sm-8 col-xs-4">
+					    <input type="text" class="form-control" id="order-quantity" placeholder="White">
+					  </div>  
+				  	<div class="col-sm-12 col-xs-2">
+						  <div class="checkbox">
+						    <input type="checkbox" id="order-edges">Clear edges
+						  </div>
+						</div>
+						<div class="col-sm-12 col-xs-4">
+						   <button type="submit" class="btn btn-primary btn-block" id="order-checkout">Checkout</button>
+						</div>
+				</form>
+
+			</div>
+			<div class="hidden command-box" id="clipart-box">
+				<div class="close-button">
 					<span class="glyphicon glyphicon-remove"></span>
 				</div>
-			</div>
-			<div class="hidden" id="font-box">
 				<div class="row">
-					<div class="col-md-12">
-						<textarea rows="1" class="form-control" id="font-textarea"></textarea>
+					<div class="col-xs-12"><h2>Select clipart</h2></div>
+				</div>
+				<img src="/images/custom1.jpg">
+				<img src="/images/custom2.jpg">
+				<img src="/images/custom8.jpg">
+				<img src="/images/custom4.jpg">
+				<img src="/images/custom5.jpg">
+				<img src="/images/custom6.jpg">
+				<img src="/images/custom9.jpg">
+				<img src="/images/custom3.jpg">
+				<img src="/images/custom7.jpg">
+				<img src="/images/custom10.jpg">
+				<img src="/images/custom8.jpg">
+				<img src="/images/custom4.jpg">
+				<img src="/images/custom5.jpg">
+				<img src="/images/custom6.jpg">
+				<img src="/images/custom7.jpg">
+				<img src="/images/custom3.jpg">
+			</div>
+			<div class="command-box hidden" id="background-box">
+				<div class="close-button">
+					<span class="glyphicon glyphicon-remove"></span>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<h2>Background color</h2>
+					</div>
+					<div class="col-xs-12">
+						<input id='bkg-colorpicker' />
+					</div>
+				</div>
+			</div>
+			<div class="hidden command-box" id="font-box">
+				<div class="row">
+					<div class="col-xs-12"><h2>Edit text</h2></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<textarea rows="2" class="form-control" id="font-textarea" placeholder="Your Text"></textarea>
 
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6">
+
+						<!--TODO - put in custom selector showing font family before selection-->
 						<select id="font-selector" class="form-control">
 							<option>Select a font</option>
-							<option>Times New Roman</option>
 							<option>Arial</option>
+							<option>Courier New</option>
+							<option>Georgia</option>
+							<option>Helvetica</option>
+							<option>Lato</option>
+							<option>Lobster</option>
+							<option>Open Sans</option>
+							<option>Oswald</option>
+							<option>Times New Roman</option>
+							<option>Wingdings</option>
 						</select>
 					</div>
-					<div class="col-xs-6"> 
-						<div class="btn-group">
-						  <button type="button" class="btn btn-default">Left</button>
-						  <button type="button" class="btn btn-default">Middle</button>
-						  <button type="button" class="btn btn-default">Right</button>
+					<div class="col-xs-6" id="font-align"> 
+						<div class="btn-group pull-right">
+						  <button type="button" class="btn btn-default" id="align-left"><span class="glyphicon glyphicon-align-left"></span></button>
+						  <button type="button" class="btn btn-default" id="align-center"><span class="glyphicon glyphicon-align-center"></button>
+						  <button type="button" class="btn btn-default" id="align-right"><span class="glyphicon glyphicon-align-right"></button>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-4">
-						Color:
-					</div>
-					<div class="col-xs-8">
-						<input id="color-selector" class="color form-control"/>
-
+					<div class="col-xs-12">
+						<input id='colorpicker' />
 					</div>
 				</div>
 				</div>

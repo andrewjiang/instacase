@@ -25,6 +25,20 @@ a:hover{
 	.btn-default{
 		background-color: #FAFBFC;
 	}
+	.chosen{
+		background-color: #777 !important;
+		color: #fff !important;
+	}
+	.chosen:hover{
+		background-color: #777;
+		color: #fff;
+	}
+	.white-label{
+		font-size: 16px;
+		font-weight: 500;
+		color: #fff;
+		padding-top: 4px;
+	}
 
 	/* Colors CSS */
 		.theme1{
@@ -74,7 +88,21 @@ a:hover{
 	padding-top: 60px;
 }
 .instacase-brand img{
-	height: 50px;
+	height: 36px;
+	margin-right: 4px;
+}
+.navbar-toggle{
+	margin-top: 8px;
+	margin-bottom: 0px;
+}
+@media (min-width: 768px){
+	.instacase-brand img{
+		height: 50px;
+		margin-right: 10px;
+		margin-bottom: 4px;
+	}
+
+
 }
 #instacase-header{
 	background-color: #FAFBFC;
@@ -89,7 +117,7 @@ a:hover{
 	z-index: 999;
 }
 .instacase-brand{
-	font-size: 32px;
+	font-size: 36px;
 	font-family: "Lobster";
 	font-weight: 700;
 	color: #f39c12;
@@ -189,18 +217,21 @@ a:hover{
 		position: relative;
 	}
 	.control-icon{
-		position: absolute;
+		position: relative;
 		font-size: 24px;
 		width: 40px;
 		height: 40px;
-		background-color: #eee;
-		opacity: 0.8;
+		background-color: #222;
+		opacity: 0.9;
 		text-align: center;
 		border-radius: 6px;
+		color: #fff;	
+		display: block;
+		margin-bottom: 10px;
 	}
 	.control-icon .glyphicon{
-		margin-top: 6px;
-		display: block;
+		padding-top: 6px;
+		display: inline-block;
 	}
 	.control-icon:hover{
 		opacity: 1;
@@ -216,34 +247,117 @@ a:hover{
 		cursor: not-allowed;
 		color: #111 !important;
 	}
-
-	#upload-icon{
-		top: 10px;
-		left: 10px;
+	.control-icon .control-label{
+		font-weight: 300;
+		color: #fff;
+		font-size: 18px;
+		padding-left: 10px;
+		position: absolute;
+		top: 8px;
+		left: 40px;
 	}
-	#text-box{
+	#font-align button{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#options-box{
 		position: absolute;
 		top: 0;
 		left: 0;
-	}
-	#image-box{
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	#font-box{
-		position: absolute;
-		top: 50%;
-		height: 50%;
-		background-color: #222;
-		width: 100%;
-		padding: 20px;
 	}
 	#font-box .row{
 		margin-bottom: 10px;
 	}
 	#font-box #font-textarea{
-		height: 40px;
+		height: 80px;
+		font-size: 24px;
+	}
+	#clipart-box{
+		overflow-y: auto;
+	}
+	#clipart-box img{
+		width: 49%;
+		opacity: 0.8;
+		margin-bottom: 2px;
+	}
+	#clipart-box img:hover{
+		opacity: 1;
+	}
+	.command-box{
+		position: absolute;
+		height: 40%;
+		background-color: #222;
+		width: 100%;
+		padding: 20px;
+	}
+	.command-box h2{
+		color: #f39c12;
+		margin-top: 0;
+		margin-bottom: 20px;
+	}
+	.command-box label{
+		color: #fff;
+	}
+	.command-box .btn-primary{
+		box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+		margin-top: 20px;
+	}
+	@media (max-width: 767px){
+		#order-box{
+			padding: 6px 4px 4px 4px;
+			height: 100px;
+			bottom: 0px;
+		}
+		#order-box h2{
+			display: none;
+		}
+		#order-checkout{
+			margin-top: 0px;
+		}
+		#order-box .checkbox{
+			margin: 0px;
+			padding: 0px;
+			color: #fff;
+			display: block;
+			text-align: right;
+		}
+		#order-edges{
+			display: block;
+			margin-left: 0px;
+			margin-right: 10px;
+		}
+		#order-box .col-xs-1, #order-box .col-xs-2, #order-box .col-xs-3, #order-box .col-xs-4, #order-box .col-xs-5, #order-box .col-xs-6, #order-box .col-xs-7, #order-box .col-xs-8, #order-box .col-xs-9, #order-box .col-xs-10, #order-box .col-xs-11, #order-box .col-xs-12{
+			padding-left: 4px;
+			padding-right: 4px;
+		}
+	}
+	@media (min-width: 768px){
+		#font-box{
+			height: 540px;
+			width: 300px;
+		}
+		#clipart-box{
+			height: 600px;
+		}
+		#order-box{
+			height: 330px;
+			width: 300px;
+			padding: 20px;
+		}
+		#background-box{
+			height: 400px;
+			width: 300px;
+		}
+		.command-box{
+			top: 10px;
+			width: 400px;
+			right: 10px;
+			border-radius: 5px;
+			border: 1px solid #222;
+		}
+		#order-box h2{
+			display: block;
+		}
 	}
 	.object-icon{
 		position: relative;
@@ -260,42 +374,99 @@ a:hover{
 	.object-icon .glyphicon{
 		margin: 0px;
 	}
-	#text-icon{
-		top: 60px;
-		left: 10px;
+	#control-box{
+		padding: 5px 5px 0px 5px;
+		position: absolute;
+		top: 20px;
+		left: 5px;
+		border: 1px solid #777;
+		border-radius: 5px;
+		background-color: #999;
 	}
-	#clipart-icon{
-		top: 110px;
-		left: 10px;
-	}
-	#background-icon{
-		top: 160px;
-		left: 10px;
-	}
-	#cart-icon{
-		top: 210px;
-		left: 10px;
+	@media (min-width: 768px){
+		.control-icon{
+			width: 200px;
+			text-align: left;
+			padding-left: 10px;
+		}
+		#control-box{
+			padding: 10px 10px 0px 10px;
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			border: 1px solid #777;
+			border-radius: 5px;
+			background-color: #999;
+		}
 	}
 	#case-absolute{
 		left: 50%;
 		position: absolute;
 		top: 10px;
 	}
-	#case-inner-border{
+	#outside-border{
+		width: 250px;
+		height: 460px;
+		border: 1px solid red;
+		border-radius: 40px;
+		position: absolute;
+		top: 20px;
+		left: 25%;
+		pointer-events:none;
+	}
+	#inside-border{
 		width: 210px;
 		height: 420px;
-		border: 2px dashed #34495e;
+		border: 1px solid blue;
 		border-radius: 20px;
-		margin: auto;
-		margin-top: 20px;
+		position: absolute;
+		top: 40px;
+		left: 25%;
+		pointer-events:none;
 	}
-	#case-outer-border{
-		width: 254px;
-		height: 464px;
-		border: 2px dashed #7f8c8d;
-		border-radius: 36px;
-		position: relative;
-		left: -50%;
+	#outside-edge{
+		width: 250px;
+		height: 460px;
+		border: 20px solid white;
+		border-radius: 40px;
+		position: absolute;
+		top: 20px;
+		left: 25%;
+		pointer-events:none;
+	}
+	@media (max-width: 768px){
+		#outside-border{
+			width: 200px;
+			height: 368px;
+			border-radius: 32px;
+			position: absolute;
+			top: 20px;
+		}
+		#inside-border{
+			width: 168px;
+			height: 336px;
+			border-radius: 16px;
+			position: absolute;
+			top: 36px;
+		}
+		#outside-edge{
+			width: 200px;
+			height: 368px;
+			border: 16px solid blue;
+			border-radius: 32px;
+			position: absolute;
+			top: 20px;
+		}
+	}
+	.close-button{
+		color: #fff;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+	.close-button:hover{
+		color: #e74c3c;
+		cursor: pointer;
 	}
 
 /* Header */
@@ -369,7 +540,7 @@ a:hover{
 	}
 	#insta-footer{
 		position: fixed;
-		background-color: #333;
+		background-color: #111;
 		width: 100%;
 		height: 72px;
 		color: #FAFBFC;
@@ -732,7 +903,11 @@ a:hover{
 		
 	}
 /* End StepThree CSS */
-
+@media (min-width: 769px){
+	.hidden-on-web{
+		display: none;
+	}
+}
 @media (max-width: 768px){
 	.hidden-on-mobile{
 		display: none;
