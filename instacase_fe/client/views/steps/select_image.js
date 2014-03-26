@@ -1,6 +1,8 @@
 Template.select_image.rendered = function(){
 	document.getElementById('image-input').addEventListener('change', newUpload, false);
 
+	//start Bootstrap Select Picker
+	$('.selectpicker').selectpicker();
 
 	if(jQuery.browser.mobile) {
 	 	//window.OverlayImg = '/images/overlay_m.png';
@@ -66,6 +68,7 @@ Template.select_image.rendered = function(){
 	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
 	$('#outside-border').css('left', cWidth/2 - outsideW/2);
 	$('#inside-border').css('left', cWidth/2 - insideW/2);
+	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
 
 	$("#colorpicker").spectrum({
 
@@ -139,12 +142,20 @@ Template.select_image.rendered = function(){
 		var image = new fabric.Image(imgElement, {
 		  left: 100,
 		  top: 100,
+		  borderColor: '#2c3e50',
+    	cornerColor: '#2980b9',
+    	transparentCorners: false,
 		});
 		canvas.add(image);
 		image.center();
 		image.setCoords();
 		canvas.setActiveObject(image);
   });
+
+  $('.selectpicker').selectpicker()
+	.change(function() {
+	    $('#outside-edge').css('border-color', $('.selectpicker').selectpicker('val'));
+	});
 
   canvas.on('object:selected', function(options) {
 	  var obj = canvas.getActiveObject();
@@ -266,7 +277,10 @@ Template.select_image.events({
 			top: cCenTop,
 			fontFamily: "Arial",
 			fontSize: 24,
-			lockUniScaling: true
+			lockUniScaling: true,
+			borderColor: '#2c3e50',
+    	cornerColor: '#2980b9',
+    	transparentCorners: false,
 		});
 		canvas.add(text);
 		canvas.setActiveObject(text);
@@ -307,9 +321,6 @@ Template.select_image.events({
 		$('#align-center').removeClass('chosen');
 		$('#align-right').addClass('chosen');
 	},
-	'click #clipart-box img': function(event, object){
-		
-	},
 	'change #font-selector': function(event){
 		var obj = canvas.getActiveObject(); 
 		obj.fontFamily = $('#font-selector').val();
@@ -343,7 +354,7 @@ Template.select_image.events({
 		var obj = canvas.getActiveObject();
 	  var index = canvas.getObjects().indexOf(obj);
 	  canvas.moveTo(obj, 1);
-	}
+	},
 	/*'change #color-selector': function(event){
 		var obj = canvas.getActiveObject(); 
 
@@ -385,7 +396,10 @@ function newUpload(evt) {
 				top: 0,
 				offLeft: 0,
 				offTop: 0,
-				angle: 0
+				angle: 0,
+				borderColor: '#2c3e50',
+    		cornerColor: '#2980b9',
+    		transparentCorners: false,
 			});
 			image.set({
 				scaleY: 260 / (image.width),
@@ -454,6 +468,7 @@ function resizeCanvas(){
 	$('#outside-border').css('left', cWidth/2 - outsideW/2);
 	$('#inside-border').css('left', cWidth/2 - insideW/2);
 	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
+	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
 	rect.set({
 		left: cCenterLeft,
 	});

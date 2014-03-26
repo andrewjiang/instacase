@@ -9,6 +9,8 @@
 			</div>
 			<div class="" id="inside-border">
 			</div>
+			<div class="" id="camera-border">
+			</div>
 
 
 			<div id="control-box">
@@ -46,7 +48,10 @@
 			</div>
 			<div class="command-box" id="order-box">
 				<form role="form">
-					<h2>Current order</h2>
+					<div class="row">
+						<div class="col-xs-12"><h2>Current Order</h2></div>
+					</div>
+					<div class="row">
 						<div class="col-sm-4 hidden-on-mobile">
 					  	<label for="order-quantity" class="hidden-on-mobile">Quantity</label>
 					  	<label for="order-quantity" class="hidden-on-web">#</label>
@@ -58,16 +63,31 @@
 					    <label for="order-color">Case</label>
 					  </div>
 					  <div class="col-sm-8 col-xs-4">
-					    <input type="text" class="form-control" id="order-quantity" placeholder="White">
-					  </div>  
-				  	<div class="col-sm-12 col-xs-2">
+					    <select class="selectpicker show-tick form-control">
+						    <option value="#fff" style="color: #FFF; background-color:#111;">White</option>
+						    <option value="#000">Black</option>
+						    <option value="#e74c3c" style="color: #e74c3c;">Red</option>
+						    <option value="#2980b9" style="color: #2980b9;">Blue</option>
+						    <option value="#f39c12" style="color: #f39c12;">Orange</option>
+						    <option value="#27ae60" style="color: #27ae60;">Green</option>
+						    <option value="#eee" style="opacity: 0.8;">Transparent</option>
+						  </select>
+					  </div>
+					  <div class="col-sm-8 col-sm-offset-4 col-xs-12">
 						  <div class="checkbox">
-						    <input type="checkbox" id="order-edges">Clear edges
+						    <input type="checkbox" id="order-edges"><span class="order-label">Empty edges</span>
 						  </div>
 						</div>
+					  <div class="col-sm-4 hidden-on-mobile">
+					    <label for="order-color">Total</label>
+					  </div>
+					  <div class="col-sm-8 col-xs-4" id="order-total">
+					    $<span id="order-value">10</span> + Shipping
+					  </div>
 						<div class="col-sm-12 col-xs-4">
-						   <button type="submit" class="btn btn-primary btn-block" id="order-checkout">Checkout</button>
+						   <button type="submit" class="btn btn-primary btn-block btn-lg" id="order-checkout"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</button>
 						</div>
+					</div>
 				</form>
 
 			</div>
@@ -78,22 +98,15 @@
 				<div class="row">
 					<div class="col-xs-12"><h2>Select clipart</h2></div>
 				</div>
-				<img src="/images/custom1.jpg">
-				<img src="/images/custom2.jpg">
-				<img src="/images/custom8.jpg">
-				<img src="/images/custom4.jpg">
-				<img src="/images/custom5.jpg">
-				<img src="/images/custom6.jpg">
-				<img src="/images/custom9.jpg">
-				<img src="/images/custom3.jpg">
-				<img src="/images/custom7.jpg">
-				<img src="/images/custom10.jpg">
-				<img src="/images/custom8.jpg">
-				<img src="/images/custom4.jpg">
-				<img src="/images/custom5.jpg">
-				<img src="/images/custom6.jpg">
-				<img src="/images/custom7.jpg">
-				<img src="/images/custom3.jpg">
+				<img src="/clipart/icon_1108.png">
+				<img src="/clipart/icon_1642.png">
+				<img src="/clipart/icon_3708.png">
+				<img src="/clipart/icon_4895.png">
+				<img src="/clipart/icon_8124.png">
+				<img src="/clipart/icon_19462.png">
+				<img src="/clipart/icon_30130.png">
+				<img src="/clipart/icon_35195.png">
+				<img src="/clipart/icon_35490.png">
 			</div>
 			<div class="command-box hidden" id="background-box">
 				<div class="close-button">

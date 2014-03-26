@@ -276,12 +276,16 @@ a:hover{
 		overflow-y: auto;
 	}
 	#clipart-box img{
-		width: 49%;
-		opacity: 0.8;
+		width: 32%;
+		opacity: 1;
+		border: 1px solid black;
+		background-color: #FAFBFC;
+		padding: 2px;
 		margin-bottom: 2px;
 	}
-	#clipart-box img:hover{
-		opacity: 1;
+	#clipart-box i{
+		font-size: 90px;
+		color: #fff;
 	}
 	.command-box{
 		position: absolute;
@@ -291,21 +295,24 @@ a:hover{
 		padding: 20px;
 	}
 	.command-box h2{
-		color: #f39c12;
+		color: #ecf0f1;
 		margin-top: 0;
 		margin-bottom: 20px;
 	}
 	.command-box label{
-		color: #fff;
+		color: #ddd;
 	}
 	.command-box .btn-primary{
 		box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
 		margin-top: 20px;
 	}
+	#order-box .checkbox{
+		color: #fff;
+	}
 	@media (max-width: 767px){
 		#order-box{
 			padding: 6px 4px 4px 4px;
-			height: 100px;
+			height: 90px;
 			bottom: 0px;
 		}
 		#order-box h2{
@@ -340,9 +347,12 @@ a:hover{
 			height: 600px;
 		}
 		#order-box{
-			height: 330px;
+			height: 320px;
 			width: 300px;
 			padding: 20px;
+		}
+		#order-box input{
+			margin-bottom: 14px;
 		}
 		#background-box{
 			height: 400px;
@@ -359,6 +369,13 @@ a:hover{
 			display: block;
 		}
 	}
+	#order-total{
+		color: #2980b9;
+		font-weight: 500;
+	}
+	#total-row{
+		padding-top: 20px;
+	}
 	.object-icon{
 		position: relative;
 		text-align: center;
@@ -368,7 +385,7 @@ a:hover{
 		background-color: #111;
 		font-size: 16px;
 		opacity: 0.9;
-		border-radius: 12px;
+		border-radius: 4px;
 		margin: 2px;
 	}
 	.object-icon .glyphicon{
@@ -379,9 +396,9 @@ a:hover{
 		position: absolute;
 		top: 20px;
 		left: 5px;
-		border: 1px solid #777;
+		border: 1px solid #aaa;
 		border-radius: 5px;
-		background-color: #999;
+		background-color: #eee;
 	}
 	@media (min-width: 768px){
 		.control-icon{
@@ -394,9 +411,9 @@ a:hover{
 			position: absolute;
 			top: 10px;
 			left: 10px;
-			border: 1px solid #777;
+			border: 1px solid #aaa;
 			border-radius: 5px;
-			background-color: #999;
+			background-color: #eee;
 		}
 	}
 	#case-absolute{
@@ -407,22 +424,36 @@ a:hover{
 	#outside-border{
 		width: 250px;
 		height: 460px;
-		border: 1px solid red;
+		border: 1px solid #e74c3c;
 		border-radius: 40px;
 		position: absolute;
 		top: 20px;
 		left: 25%;
 		pointer-events:none;
+		-moz-box-shadow: 0px 0px 0px 10000px rgba(50,50,50, 0.5);
+	  -webkit-box-shadow: 0px 0px 0px 10000px rgba(50,50,50, 0.5);
+	  box-shadow: 0px 0px 0px 10000px rgba(50,50,50, 0.5);
 	}
 	#inside-border{
 		width: 210px;
 		height: 420px;
-		border: 1px solid blue;
+		border: 1px solid #c0392b;
 		border-radius: 20px;
 		position: absolute;
 		top: 40px;
 		left: 25%;
 		pointer-events:none;
+	}
+	#camera-border{
+		width: 72px;
+		height: 30px;
+		border: 1px solid #c0392b;
+		border-radius: 15px;
+		position: absolute;
+		top: 54px;
+		left: 25%;
+		pointer-events:none;
+		background-color: rgba(0,0,0,0.5)
 	}
 	#outside-edge{
 		width: 250px;
@@ -452,7 +483,7 @@ a:hover{
 		#outside-edge{
 			width: 200px;
 			height: 368px;
-			border: 16px solid blue;
+			border: 16px solid white;
 			border-radius: 32px;
 			position: absolute;
 			top: 20px;
