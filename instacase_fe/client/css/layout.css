@@ -344,35 +344,6 @@ a:hover{
 	#order-box h2{
 		display: block;
 	}
-	@media (max-width: 767px){
-		#order-box{
-			padding: 6px 4px 4px 4px;
-			height: 90px;
-			bottom: 0px;
-		}
-		#order-box h2{
-			display: none;
-		}
-		#order-checkout{
-			margin-top: 0px;
-		}
-		#order-box .checkbox{
-			margin: 0px;
-			padding: 0px;
-			color: #fff;
-			display: block;
-			text-align: right;
-		}
-		#order-edges{
-			display: block;
-			margin-left: 0px;
-			margin-right: 10px;
-		}
-		#order-box .col-xs-1, #order-box .col-xs-2, #order-box .col-xs-3, #order-box .col-xs-4, #order-box .col-xs-5, #order-box .col-xs-6, #order-box .col-xs-7, #order-box .col-xs-8, #order-box .col-xs-9, #order-box .col-xs-10, #order-box .col-xs-11, #order-box .col-xs-12{
-			padding-left: 4px;
-			padding-right: 4px;
-		}
-	}
 	#order-total{
 		color: #2980b9;
 		font-weight: 500;
@@ -404,21 +375,19 @@ a:hover{
 		border-radius: 5px;
 		background-color: #eee;
 	}
-	@media (min-width: 768px){
-		.control-icon{
-			width: 200px;
-			text-align: left;
-			padding-left: 10px;
-		}
-		#control-box{
-			padding: 10px 10px 0px 10px;
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			border: 1px solid #aaa;
-			border-radius: 5px;
-			background-color: #eee;
-		}
+	.control-icon{
+		width: 200px;
+		text-align: left;
+		padding-left: 10px;
+	}
+	#control-box{
+		padding: 10px 10px 0px 10px;
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+		background-color: #eee;
 	}
 	#case-absolute{
 		left: 50%;
@@ -468,30 +437,6 @@ a:hover{
 		top: 20px;
 		left: 25%;
 		pointer-events:none;
-	}
-	@media (max-width: 768px){
-		#outside-border{
-			width: 200px;
-			height: 368px;
-			border-radius: 32px;
-			position: absolute;
-			top: 20px;
-		}
-		#inside-border{
-			width: 168px;
-			height: 336px;
-			border-radius: 16px;
-			position: absolute;
-			top: 36px;
-		}
-		#outside-edge{
-			width: 200px;
-			height: 368px;
-			border: 16px solid white;
-			border-radius: 32px;
-			position: absolute;
-			top: 20px;
-		}
 	}
 	.close-button{
 		color: #fff;
