@@ -12,15 +12,18 @@ Template.select_image.rendered = function(){
 		window.isMobile = false;
 	};
 
-
+	// Resize function on resizing the window
   window.onresize = resizeCanvas;
+
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
-  window.json = JSON.stringify(canvas.toJSON());
+  window.f = fabric.Image.filters;
+  window.filters = {};
 
   window.cWidth = canvas.getWidth() + 0.0;
 	window.cHeight = canvas.getHeight() + 0.0;
 
+	// Setting canvas Height and setting minimums
   var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
   	canvas.setHeight(canvasHeight);
@@ -29,16 +32,11 @@ Template.select_image.rendered = function(){
   }
 	canvas.setWidth($('#canvas-container').width());
 
-  // Create a text object. 
-  // Does not display it-the canvas doesn't 
-  // know about it yet.
-  /* var hi = new fabric.Text('hello, world.', {
-      left: canvas.getWidth() / 2,
-      top: canvas.getHeight() / 2        
-  }); */
 
+	// Background of the case
   var rect = new fabric.Rect({
 	  originY: "top",
+	  originX: "center",
 	  left: canvas.getWidth() / 2+1,
     top: 20,  
 	  fill: 'white',
@@ -47,16 +45,11 @@ Template.select_image.rendered = function(){
 	  rx: 46,
 	  ry: 46,
 	  selectable: false,
+
 	});
 
-	if (isMobile){
-
-	} else {
-
-	}
 	
-	//Center Overlay Divs
-
+	// Set iPhone case outlines
 	var cWidth = canvas.getWidth();
 	var cHeight = canvas.getHeight();
 
@@ -70,9 +63,9 @@ Template.select_image.rendered = function(){
 	$('#inside-border').css('left', cWidth/2 - insideW/2);
 	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
 
+
+	// Initializing color pickers
 	$("#colorpicker").spectrum({
-
-
 
 	    color: "#111",
 	    flat: true,
@@ -98,8 +91,6 @@ Template.select_image.rendered = function(){
 
 	$("#bkg-colorpicker").spectrum({
 
-
-
 	    color: "#fff",
 	    flat: true,
     	showInput: true,
@@ -119,24 +110,9 @@ Template.select_image.rendered = function(){
 
 	});
 
-  /*fabric.Image.fromURL('http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg', function(oImg) {
-	  canvas.add(oImg), {left: iwidth, top: iheight}
-	});*/
-	
-	
-	
-	/*canvas.setOverlayImage(OverlayImg, 
-		canvas.renderAll.bind(canvas), 
-		{overlayImageLeft: cwidth, overlayImageTop: cheight});*/
-	
-
-
-  // Attach it to the canvas object, then (re)display
-  // the canvas.    
-  // canvas.add(hi);
   canvas.add(rect);
-  //canvas.sendBackward(oImg);
 
+  // Adding clipart on clicks
   $('#clipart-box img').click(function(){
   	var imgElement = this;
 		var image = new fabric.Image(imgElement, {
@@ -145,6 +121,8 @@ Template.select_image.rendered = function(){
 		  borderColor: '#2c3e50',
     	cornerColor: '#2980b9',
     	transparentCorners: false,
+    	originX: 'center',
+			originY: 'center',
 		});
 		canvas.add(image);
 		image.center();
@@ -152,11 +130,13 @@ Template.select_image.rendered = function(){
 		canvas.setActiveObject(image);
   });
 
+  // Change case color
   $('.selectpicker').selectpicker()
 	.change(function() {
 	    $('#outside-edge').css('border-color', $('.selectpicker').selectpicker('val'));
 	});
 
+	// Events triggered on object selection
   canvas.on('object:selected', function(options) {
 	  var obj = canvas.getActiveObject();
 	  $('#options-box').removeClass("hidden");
@@ -166,14 +146,21 @@ Template.select_image.rendered = function(){
 		  	case "text":
 		  		$('#clipart-box').addClass('hidden');
 		  		$('#background-box').addClass('hidden');
+		  		$('#image-box').addClass('hidden');
 		  	  $('#font-box').removeClass("hidden");
 		  	  getFontInfo();
 		  	  break;
 		  	case "image":
-		  	  $('#font-box').addClass("hidden");
+		  	  $('#clipart-box').addClass('hidden');
+		  		$('#background-box').addClass('hidden');
+		  		$('#font-box').addClass('hidden');
+		  	  $('#image-box').removeClass("hidden");
 		  	  break;
 		  	default:
-		  		$('#font-box').addClass("hidden");
+		  		$('#clipart-box').addClass('hidden');
+		  		$('#background-box').addClass('hidden');
+		  		$('#font-box').addClass('hidden');
+		  	  $('#image-box').addClass("hidden");
 		  	  break;
 		  };
 	  }
@@ -199,37 +186,35 @@ Template.select_image.rendered = function(){
 	  moveButtons();
 
 	});
+
+	// Events triggered on object rotation
 	canvas.on('object:rotating', function(options) {
 	  
 	  moveButtons();
 
 	});
+
+	// Events triggered on object modification
 	canvas.on('object:modified', function(options) {
 	  
 	  moveButtons();
 
 	});
+
+	// Events triggered on object move
 	canvas.on('object:moving', function(options) {
 
 		moveButtons();
 
-	  /*var obj = canvas.getActiveObject();
-
-	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
-		var cCenTop = (canvas.getHeight() + 0.0) / 2;
-		var offL = obj.left - cCenLeft;
-		var offT = obj.top - cCenTop; 
-
-		obj.offLeft = offL;
-		obj.offTop = offT;
-		json = JSON.stringify(canvas.toJSON(['offTop', 'offLeft']));*/
-
 	});
+
+	// Events triggered on object clear
 	canvas.on('selection:cleared', function(options) {
 	  var obj = canvas.getActiveObject();
 
 	  $('#options-box').addClass("hidden");
 	  $('#font-box').addClass("hidden");
+	  $('#image-box').addClass("hidden");
 	  $('#move-up-icon').addClass("hidden");
 	  $('#move-down-icon').addClass("hidden");
 
@@ -281,6 +266,8 @@ Template.select_image.events({
 			borderColor: '#2c3e50',
     	cornerColor: '#2980b9',
     	transparentCorners: false,
+    	originX: 'center',
+			originY: 'center',
 		});
 		canvas.add(text);
 		canvas.setActiveObject(text);
@@ -329,18 +316,19 @@ Template.select_image.events({
 	},
 	'click #clipart-icon': function(event){
 		$('#font-box').addClass('hidden');
+		$('#image-box').addClass('hidden');
 		$('#clipart-box').removeClass('hidden');
 		$('#background-box').addClass('hidden');
 	},
 	'click #background-icon': function(event){
 		$('#font-box').addClass('hidden');
+		$('#image-box').addClass('hidden');
 		$('#clipart-box').addClass('hidden');
 		$('#background-box').removeClass('hidden');
 	},
 	'click .close-button': function(event){
 		$('#clipart-box').addClass('hidden');
 		$('#background-box').addClass('hidden');
-		$('#font-box').addClass('hidden');
 	},
 	'click #order-edges': function(event){
 		$('#outside-edge').toggleClass('hidden')
@@ -349,38 +337,88 @@ Template.select_image.events({
 		var obj = canvas.getActiveObject();
 	  var numIndex = canvas.getObjects().length - 1;
 	  canvas.moveTo(obj, numIndex);
+
+	  var index = canvas.getObjects().indexOf(obj);
+
+	  if(index<numIndex && index>1){
+	  	$('#move-up-icon').removeClass("hidden");
+	  	$('#move-down-icon').removeClass("hidden");
+	  } else if (index==numIndex && index>1){
+	  	$('#move-up-icon').addClass("hidden");
+	  	$('#move-down-icon').removeClass("hidden");
+	  } else if (index==1 && index<numIndex){
+	  	$('#move-up-icon').removeClass("hidden");
+	  	$('#move-down-icon').addClass("hidden");
+	  } else{
+	  	$('#move-up-icon').addClass("hidden");
+	  	$('#move-down-icon').addClass("hidden");
+	  };
 	},
 	'click #move-down-icon': function(event){
 		var obj = canvas.getActiveObject();
-	  var index = canvas.getObjects().indexOf(obj);
 	  canvas.moveTo(obj, 1);
+
+	  var index = canvas.getObjects().indexOf(obj);
+	  var numIndex = canvas.getObjects().length - 1;
+
+	  if(index<numIndex && index>1){
+	  	$('#move-up-icon').removeClass("hidden");
+	  	$('#move-down-icon').removeClass("hidden");
+	  } else if (index==numIndex && index>1){
+	  	$('#move-up-icon').addClass("hidden");
+	  	$('#move-down-icon').removeClass("hidden");
+	  } else if (index==1 && index<numIndex){
+	  	$('#move-up-icon').removeClass("hidden");
+	  	$('#move-down-icon').addClass("hidden");
+	  } else{
+	  	$('#move-up-icon').addClass("hidden");
+	  	$('#move-down-icon').addClass("hidden");
+	  };
 	},
-	/*'change #color-selector': function(event){
-		var obj = canvas.getActiveObject(); 
 
-		var color = $('#color-selector').val();
+	// Image Filters
 
-		var rgbcolor = hexToRgb(color);
+	'click #filter-Grayscale': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(0, new f.Grayscale());
+	},
+	'click #filter-Sepia2': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(1, new f.Sepia2());
+	},
+	'click #filter-Sepia': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(2, new f.Sepia());
+	},
+	'click #filter-Blur': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(3, new f.Convolute({
+      matrix: [ 1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9 ]
+    }));
+	},
+	'click #filter-Sharpen': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(4, new f.Convolute({
+      matrix: [  0, -1,  0,
+                -1,  5, -1,
+                 0, -1,  0 ]
+    }));
+	},
+	'click #filter-Emboss': function(event){
+		var obj = canvas.getActiveObject();
+	  applyFilter(5, new f.Convolute({
+      matrix: [ 1,   1,  1,
+                1, 0.7, -1,
+               -1,  -1, -1 ]
+    }));
+	},
 
-		obj.fill = rgbcolor;
-
-		canvas.renderAll();
-
-		getFontInfo;
-		
-
-		//document.getElementById('color-selector').color.fromString(hexcolor);
-		//obj.fontFamily = $('#font-selector').val();
-		//canvas.renderAll();
-		//getFontInfo();
-	},*/
 });
 
 function newUpload(evt) {
-	/*URL = 'http://agileimpact.org/wp-content/uploads/2014/03/TwWc21Ai.jpeg'
-  fabric.Image.fromURL(URL, function(oImg) {
-	  canvas.add(oImg), {left: 100, top: 100}
-	});*/
+
 	var reader = new FileReader();
 	reader.onload = function(event) { console.log ('loading reader');
 		var imgObj = new Image()
@@ -418,8 +456,8 @@ function newUpload(evt) {
 };
 function moveButtons(){
 	var obj = canvas.getActiveObject();
-	var	rX = (obj.currentWidth / 2)
-	var	rY = (obj.currentHeight / 2)
+	var	rX = (obj.currentWidth / 2);
+	var	rY = (obj.currentHeight / 2);
 	var X = obj.left - rX;
 	var Y = obj.top - rY;
 	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 20;
@@ -434,10 +472,10 @@ function moveButtons(){
   $('#options-box').css("left", IconX);
 	$('#options-box').css("top", IconY);
 	$('#options-box').css("transform", "rotate(" + obj.angle + "deg)");
+	obj.setCoords();
 
 };
 function resizeCanvas(){
-	canvas.loadFromJSON(json);
 	//resetting size of Canvas
 	var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
@@ -454,6 +492,7 @@ function resizeCanvas(){
 	//set Canvas Height and Width
 	cWidth = canvas.getWidth() + 0.0;
 	cHeight = canvas.getHeight() + 0.0;
+
 	var rect = canvas.item(0);
 	var oWidth = cWidth / 2 - 1000;
 	var oHeight = cHeight / 2 - 500;
@@ -469,6 +508,7 @@ function resizeCanvas(){
 	$('#inside-border').css('left', cWidth/2 - insideW/2);
 	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
 	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
+
 	rect.set({
 		left: cCenterLeft,
 	});
@@ -521,21 +561,25 @@ function getFontInfo(){
 
 
 };
-/*function rgbToHex(R,G,B) {
-	return toHex(R)+toHex(G)+toHex(B)
-};
-function toHex(n) {
- n = parseInt(n,10);
- if (isNaN(n)) return "00";
- n = Math.max(0,Math.min(n,255));
- return "0123456789ABCDEF".charAt((n-n%16)/16)
-      + "0123456789ABCDEF".charAt(n%16);
-};
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return "rgb(" + parseInt(result[1], 16) +", "+ parseInt(result[2], 16) +", "+ parseInt(result[3], 16) + ")";
-}*/
+
+// Show Font Editor
 function showEditor(){
 	$('#font-box').removeClass("hidden");
 	getFontInfo();
+}
+
+// Apply Filter to Object
+function applyFilter(index, filter) {
+  var obj = canvas.getActiveObject();
+  obj.filters[index] = filter;
+  obj.applyFilters(canvas.renderAll.bind(canvas));
+}
+
+// Apply Filter Value to Object
+function applyFilterValue(index, prop, value) {
+  var obj = canvas.getActiveObject();
+  if (obj.filters[index]) {
+    obj.filters[index][prop] = value;
+    obj.applyFilters(canvas.renderAll.bind(canvas));
+  }
 }
