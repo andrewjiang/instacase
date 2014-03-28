@@ -34,7 +34,20 @@ Template.select_image.rendered = function(){
 
 
 	// Background of the case
-  var rect = new fabric.Rect({
+  var phoneBkg = new fabric.Rect({
+	  originY: "top",
+	  originX: "center",
+	  left: canvas.getWidth() / 2+1,
+    top: 20,  
+	  fill: 'none',
+	  width: 250,
+	  height: 460,
+	  rx: 46,
+	  ry: 46,
+	  selectable: false,
+	});
+
+	var phoneCase = new fabric.Rect({
 	  originY: "top",
 	  originX: "center",
 	  left: canvas.getWidth() / 2+1,
@@ -45,8 +58,10 @@ Template.select_image.rendered = function(){
 	  rx: 46,
 	  ry: 46,
 	  selectable: false,
-
 	});
+
+	canvas.add(phoneCase);
+	canvas.add(phoneBkg);
 
 	
 	// Set iPhone case outlines
@@ -104,13 +119,13 @@ Template.select_image.rendered = function(){
 	    preferredFormat: "hex",
 	    move: function(color) {
     		var color = color.toRgbString();
-    		rect.fill = color;
+    		phoneBkg.fill = color;
     		canvas.renderAll();
 			}
 
 	});
 
-  canvas.add(rect);
+  
 
   // Adding clipart on clicks
   $('#clipart-box img').click(function(){
@@ -134,6 +149,8 @@ Template.select_image.rendered = function(){
   $('.selectpicker').selectpicker()
 	.change(function() {
 	    $('#outside-edge').css('border-color', $('.selectpicker').selectpicker('val'));
+	    phoneCase.fill = $('.selectpicker').selectpicker('val');
+	    canvas.renderAll();
 	});
 
 	// Events triggered on object selection
@@ -493,7 +510,8 @@ function resizeCanvas(){
 	cWidth = canvas.getWidth() + 0.0;
 	cHeight = canvas.getHeight() + 0.0;
 
-	var rect = canvas.item(0);
+	var phoneBkg = canvas.item(1);
+	var phoneCase = canvas.item(0);
 	var oWidth = cWidth / 2 - 1000;
 	var oHeight = cHeight / 2 - 500;
 	var cCenterTop = cHeight / 2;
@@ -509,8 +527,11 @@ function resizeCanvas(){
 	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
 	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
 
-	rect.set({
-		left: cCenterLeft,
+	phoneBkg.set({
+		left: cCenterLeft+1,
+	});
+	phoneCase.set({
+		left: cCenterLeft+1,
 	});
 	canvas.renderAll();
 	/*canvas.setOverlayImage(OverlayImg, 
