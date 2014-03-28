@@ -20,7 +20,7 @@ Template.select_image.rendered = function(){
 	};
 
 	// Resize function on resizing the window
-  window.onresize = resizeCanvas;
+  window.onresize = _.debounce(resizeCanvas, 250);
 
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
@@ -406,36 +406,36 @@ Template.select_image.events({
 	// Image Filters
 
 	'click #filter-Grayscale': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(0, new f.Grayscale());
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(0, enabled && new f.Grayscale());
 	},
 	'click #filter-Sepia2': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(1, new f.Sepia2());
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(1, enabled && new f.Sepia2());
 	},
 	'click #filter-Sepia': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(2, new f.Sepia());
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(2, enabled && new f.Sepia());
 	},
 	'click #filter-Blur': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(3, new f.Convolute({
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(3, enabled && new f.Convolute({
       matrix: [ 1/9, 1/9, 1/9,
                 1/9, 1/9, 1/9,
                 1/9, 1/9, 1/9 ]
     }));
 	},
 	'click #filter-Sharpen': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(4, new f.Convolute({
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(3, enabled && new f.Convolute({
       matrix: [  0, -1,  0,
                 -1,  5, -1,
                  0, -1,  0 ]
     }));
 	},
 	'click #filter-Emboss': function(event){
-		var obj = canvas.getActiveObject();
-	  applyFilter(5, new f.Convolute({
+      var enabled = toggleFilterButton(event.currentTarget);
+	  applyFilter(4, enabled && new f.Convolute({
       matrix: [ 1,   1,  1,
                 1, 0.7, -1,
                -1,  -1, -1 ]
@@ -604,6 +604,17 @@ function getFontInfo(){
 function showEditor(){
 	$('#font-box').removeClass("hidden");
 	getFontInfo();
+}
+
+/**
+ * Toggles the given filter button on or off
+ * @param {HTMLElement} button The button to toggle
+ * @return {boolean} the new toggle status of the button
+ */
+function toggleFilterButton(button) {
+    var $button = $(button);
+    $button.toggleClass('filter-enabled');
+    return $button.hasClass('filter-enabled');
 }
 
 // Apply Filter to Object
