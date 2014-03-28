@@ -96,8 +96,9 @@ Template.select_image.rendered = function(){
     	showAlpha: true,
     	showPalette: true,
 	    palette: [
-	        ['black', 'white', 'blanchedalmond'],
-	        ['rgb(255, 128, 0);', 'hsv 100 70 50', 'lightyellow']
+	        ['black', 'white', '#1abc9c', '#16a085', '#2ecc71','#27ae60'],
+	        ['#f1c40f','#f39c12','#e67e22','#d35400','#e74c3c','#c0392b'],
+	        ['#3498db','#2980b9','#34495e','#2c3e50','#9b59b6','#8e44ad']
 	    ],
 	    showButtons: false,
 	    preferredFormat: "hex",
@@ -119,8 +120,9 @@ Template.select_image.rendered = function(){
     	clickoutFiresChange: true,
     	showPalette: true,
 	    palette: [
-	        ['black', 'white', 'blanchedalmond'],
-	        ['rgb(255, 128, 0);', 'hsv 100 70 50', 'lightyellow']
+	        ['black', 'white', '#1abc9c', '#16a085', '#2ecc71','#27ae60'],
+	        ['#f1c40f','#f39c12','#e67e22','#d35400','#e74c3c','#c0392b'],
+	        ['#3498db','#2980b9','#34495e','#2c3e50','#9b59b6','#8e44ad']
 	    ],
 	    showButtons: false,
 	    preferredFormat: "hex",
@@ -285,7 +287,7 @@ Template.select_image.events({
 		var text = new fabric.Text("", { 
 			left: cCenLeft, 
 			top: cCenTop,
-			fontFamily: "Arial",
+			fontFamily: "Lato",
 			fontSize: 24,
 			lockUniScaling: true,
 			borderColor: '#2c3e50',
@@ -335,9 +337,13 @@ Template.select_image.events({
 	},
 	'change #font-selector': function(event){
 		var obj = canvas.getActiveObject(); 
+		$('#font-textarea').css('font-family', $('#font-selector').val());
+		canvas.renderAll();
+		alert("Loads");
 		obj.fontFamily = $('#font-selector').val();
 		canvas.renderAll();
-		getFontInfo();
+		
+
 	},
 	'click #clipart-icon': function(event){
 		$('#font-box').addClass('hidden');
