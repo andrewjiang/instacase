@@ -447,6 +447,21 @@ Template.select_image.events({
                -1,  -1, -1 ]
     }));
 	},
+    'click #filter-tint-color': function(event){
+        var element = event.currentTarget;
+        applyFilter(5, element.checked && new f.Tint({
+            color: document.getElementById('filter-tint-color-intensity').value,
+            opacity: parseFloat(document.getElementById('filter-tint-color-opacity').value)
+        }));
+    },
+    'change #filter-tint-color-intensity': function(event){
+        var element = event.currentTarget;
+        applyFilterValue(5, 'color', element.value);
+    },
+    'change #filter-tint-color-opacity': function(event){
+        var element = event.currentTarget;
+        applyFilterValue(5, 'opacity', element.value);
+    },
 
 	// Order Options
 	'change #order-quantity': function(event){
