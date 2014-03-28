@@ -191,13 +191,13 @@ Template.select_image.rendered = function(){
 	  var index = canvas.getObjects().indexOf(obj);
 	  var numIndex = canvas.getObjects().length - 1;
 
-	  if(index<numIndex && index>1){
+	  if(index<numIndex && index>2){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==numIndex && index>1){
+	  } else if (index==numIndex && index>2){
 	  	$('#move-up-icon').addClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==1 && index<numIndex){
+	  } else if (index==2 && index<numIndex){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').addClass("hidden");
 	  } else{
@@ -367,13 +367,13 @@ Template.select_image.events({
 
 	  var index = canvas.getObjects().indexOf(obj);
 
-	  if(index<numIndex && index>1){
+	  if(index<numIndex && index>2){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==numIndex && index>1){
+	  } else if (index==numIndex && index>2){
 	  	$('#move-up-icon').addClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==1 && index<numIndex){
+	  } else if (index==2 && index<numIndex){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').addClass("hidden");
 	  } else{
@@ -383,18 +383,18 @@ Template.select_image.events({
 	},
 	'click #move-down-icon': function(event){
 		var obj = canvas.getActiveObject();
-	  canvas.moveTo(obj, 1);
+	  canvas.moveTo(obj, 2);
 
 	  var index = canvas.getObjects().indexOf(obj);
 	  var numIndex = canvas.getObjects().length - 1;
 
-	  if(index<numIndex && index>1){
+	  if(index<numIndex && index>2){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==numIndex && index>1){
+	  } else if (index==numIndex && index>2){
 	  	$('#move-up-icon').addClass("hidden");
 	  	$('#move-down-icon').removeClass("hidden");
-	  } else if (index==1 && index<numIndex){
+	  } else if (index==2 && index<numIndex){
 	  	$('#move-up-icon').removeClass("hidden");
 	  	$('#move-down-icon').addClass("hidden");
 	  } else{
