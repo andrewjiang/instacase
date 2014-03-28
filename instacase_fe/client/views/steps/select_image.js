@@ -1,6 +1,13 @@
 Template.select_image.rendered = function(){
 	document.getElementById('image-input').addEventListener('change', newUpload, false);
 
+	$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
 	//start Bootstrap Select Picker
 	$('.selectpicker').selectpicker();
 
@@ -125,8 +132,6 @@ Template.select_image.rendered = function(){
 
 	});
 
-  
-
   // Adding clipart on clicks
   $('#clipart-box img').click(function(){
   	var imgElement = this;
@@ -238,13 +243,16 @@ Template.select_image.rendered = function(){
 	});
 
 
-	//listen for text area changes and change font with it
+	// Listen for text area changes and change font with it
 	$('#font-textarea').bind('input propertychange', function() {
 		var obj = canvas.getActiveObject();
 		obj.text = $('#font-textarea').val();
 		canvas.renderAll();
 		moveButtons();
 	});
+
+	// Set initial price
+	setPrice(1);
 
 };
 
@@ -350,6 +358,8 @@ Template.select_image.events({
 	'click #order-edges': function(event){
 		$('#outside-edge').toggleClass('hidden')
 	},
+
+	// Object mpve to front / back options
 	'click #move-up-icon': function(event){
 		var obj = canvas.getActiveObject();
 	  var numIndex = canvas.getObjects().length - 1;
@@ -430,6 +440,13 @@ Template.select_image.events({
                 1, 0.7, -1,
                -1,  -1, -1 ]
     }));
+	},
+
+	// Order Options
+	'change #order-quantity': function(event){
+		var quantity = $('#order-quantity').val();
+		console.log(quantity);
+		setPrice(quantity);
 	},
 
 });
@@ -603,4 +620,10 @@ function applyFilterValue(index, prop, value) {
     obj.filters[index][prop] = value;
     obj.applyFilters(canvas.renderAll.bind(canvas));
   }
+}
+
+// Set Total Price
+function setPrice(value) {
+	var total = value * 10;
+	$('#order-value').html(total);
 }
