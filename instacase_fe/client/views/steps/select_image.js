@@ -140,11 +140,15 @@ Template.select_image.rendered = function(){
 		var image = new fabric.Image(imgElement, {
 		  left: 100,
 		  top: 100,
-		  borderColor: '#2c3e50',
-    	cornerColor: '#2980b9',
-    	transparentCorners: false,
+    	transparentCorners: true,
     	originX: 'center',
 			originY: 'center',
+			hasBorders: false,
+  		lockUniScaling: true,
+  		hasCorners: false,
+  		borderColor: 'rgba(0,0,0,0)',
+  		cornerColor: 'rgba(0,0,0,0)',
+  		cornerSize: 20,
 		});
 		canvas.add(image);
 		image.center();
@@ -164,6 +168,7 @@ Template.select_image.rendered = function(){
   canvas.on('object:selected', function(options) {
 	  var obj = canvas.getActiveObject();
 	  $('#options-box').removeClass("hidden");
+	  $('#object-box').removeClass("hidden");
 	  try{
 	  	switch(obj.type)
 		  {
@@ -237,6 +242,7 @@ Template.select_image.rendered = function(){
 	  var obj = canvas.getActiveObject();
 
 	  $('#options-box').addClass("hidden");
+	  $('#object-box').addClass("hidden");
 	  $('#font-box').addClass("hidden");
 	  $('#image-box').addClass("hidden");
 	  $('#move-up-icon').addClass("hidden");
@@ -290,11 +296,14 @@ Template.select_image.events({
 			fontFamily: "Lato",
 			fontSize: 24,
 			lockUniScaling: true,
-			borderColor: '#2c3e50',
-    	cornerColor: '#2980b9',
-    	transparentCorners: false,
+			hasBorders: false,
+			hasCorners: false,
+    	transparentCorners: true,
     	originX: 'center',
 			originY: 'center',
+  		borderColor: 'rgba(0,0,0,0)',
+  		cornerColor: 'rgba(0,0,0,0)',
+  		cornerSize: 20,
 		});
 		canvas.add(text);
 		canvas.setActiveObject(text);
@@ -338,10 +347,9 @@ Template.select_image.events({
 	'change #font-selector': function(event){
 		var obj = canvas.getActiveObject(); 
 		$('#font-textarea').css('font-family', $('#font-selector').val());
-		canvas.renderAll();
-		alert("Loads");
 		obj.fontFamily = $('#font-selector').val();
 		canvas.renderAll();
+		moveButtons();
 		
 
 	},
@@ -525,9 +533,13 @@ function newUpload(evt) {
 				offLeft: 0,
 				offTop: 0,
 				angle: 0,
-				borderColor: '#2c3e50',
-    		cornerColor: '#2980b9',
-    		transparentCorners: false,
+    		transparentCorners: true,
+    		hasBorders: false,
+    		lockUniScaling: true,
+    		hasCorners: false,
+    		borderColor: 'rgba(0,0,0,0)',
+  			cornerColor: 'rgba(0,0,0,0)',
+    		cornerSize: 20,
 			});
 			image.set({
 				scaleY: 260 / (image.width),
@@ -550,7 +562,7 @@ function moveButtons(){
 	var	rY = (obj.currentHeight / 2);
 	var X = obj.left - rX;
 	var Y = obj.top - rY;
-	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 20;
+	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 30;
 	var theta = ((obj.angle) * Math.PI / 180) + Math.atan(rY/rX);
 
 	var optionsH = $('#options-box').height();
@@ -562,6 +574,13 @@ function moveButtons(){
   $('#options-box').css("left", IconX);
 	$('#options-box').css("top", IconY);
 	$('#options-box').css("transform", "rotate(" + obj.angle + "deg)");
+	obj.setCoords();
+
+	$('#object-box').css("width", rX*2);
+	$('#object-box').css("height", rY*2);
+	$('#object-box').css("left", X);
+	$('#object-box').css("top", Y);
+	$('#object-box').css("transform", "rotate(" + obj.angle + "deg)");
 	obj.setCoords();
 
 };
