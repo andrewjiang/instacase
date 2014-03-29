@@ -125,7 +125,7 @@ Template.select_image.rendered = function(){
   	var imgElement = this;
   	var containerWidth = $('#canvas-container').width();
 		var image = new fabric.Image(imgElement, {
-		  left: containerWidth/2,
+		  left: containerWidth/2 - canvasOffset,
 		  top: 240,
     	transparentCorners: true,
     	originX: 'center',
@@ -274,7 +274,7 @@ Template.select_image.events({
 		
 		var containerWidth = $('#canvas-container').width();
 		var text = new fabric.Text("", { 
-			left: containerWidth/2,
+			left: containerWidth/2 - canvasOffset,
 			top: 240,
 			fontFamily: "Lato",
 			fontSize: 24,
@@ -288,7 +288,7 @@ Template.select_image.events({
 			cornerColor: 'rgba(0,0,0,0)',
 			cornerSize: 20
 		});
-		
+
 		canvas.add(text);
 		canvas.setActiveObject(text);
 		showEditor();
@@ -513,7 +513,7 @@ function newUpload(evt) {
 			image.set({
 				originX: 'center',
 				originY: 'center',
-				left: containerWidth/2,
+				left: containerWidth/2 - canvasOffset,
 				top: 240,
 				offLeft: 0,
 				offTop: 0,
