@@ -273,22 +273,22 @@ Template.select_image.events({
 	'click #text-icon': function(event){
 		
 		var containerWidth = $('#canvas-container').width();
-
 		var text = new fabric.Text("", { 
-			left: containerWidth/2, 
+			left: containerWidth/2,
 			top: 240,
 			fontFamily: "Lato",
 			fontSize: 24,
 			lockUniScaling: true,
 			hasBorders: false,
 			hasCorners: false,
-    	transparentCorners: true,
-    	originX: 'center',
+			transparentCorners: true,
+			originX: 'center',
 			originY: 'center',
-  		borderColor: 'rgba(0,0,0,0)',
-  		cornerColor: 'rgba(0,0,0,0)',
-  		cornerSize: 20,
+			borderColor: 'rgba(0,0,0,0)',
+			cornerColor: 'rgba(0,0,0,0)',
+			cornerSize: 20
 		});
+		
 		canvas.add(text);
 		canvas.setActiveObject(text);
 		showEditor();
