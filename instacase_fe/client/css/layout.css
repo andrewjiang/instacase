@@ -318,6 +318,7 @@ a:hover{
 		min-height: 484px;
 		border: 1px dashed #fff;
 		position: relative;
+		overflow: hidden;
 	}
 	.control-icon{
 		position: relative;
@@ -710,7 +711,9 @@ a:hover{
 		color: #fff;
 		position: relative;
 	}
-
+	.canvas-container{
+		left: 0px;
+	}
 	.insta-header{
 		height: 70px;
 		background-color: #333;
