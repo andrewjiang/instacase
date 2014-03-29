@@ -20,15 +20,17 @@ Template.select_image.rendered = function(){
 	};
 
 	// Resize function on resizing the window
-  window.onresize = _.debounce(resizeCanvas, 250);
+  window.onresize = resizeCanvas;
 
   // Obtain a canvas drawing surface from fabric.js
   window.canvas = new fabric.Canvas('insta-canvas');
   window.f = fabric.Image.filters;
   window.filters = {};
 
-  window.cWidth = canvas.getWidth() + 0.0;
-	window.cHeight = canvas.getHeight() + 0.0;
+	var containerWidth = $('#canvas-container').width();
+	window.oriContWidth = containerWidth;
+	window.canvasOffset = 0;
+
 
 	// Setting canvas Height and setting minimums
   var canvasHeight = $(window).height()-$('#instacase-header').height()-14
@@ -37,14 +39,14 @@ Template.select_image.rendered = function(){
   } else {
   	canvas.setHeight(484);
   }
-	canvas.setWidth($('#canvas-container').width());
+	canvas.setWidth(2000);
 
 
 	// Background of the case
   var phoneBkg = new fabric.Rect({
 	  originY: "top",
 	  originX: "center",
-	  left: canvas.getWidth() / 2+1,
+	  left: containerWidth / 2,
     top: 20,  
 	  fill: 'none',
 	  width: 250,
@@ -57,7 +59,7 @@ Template.select_image.rendered = function(){
 	var phoneCase = new fabric.Rect({
 	  originY: "top",
 	  originX: "center",
-	  left: canvas.getWidth() / 2+1,
+	  left: containerWidth / 2,
     top: 20,  
 	  fill: 'white',
 	  width: 250,
@@ -69,22 +71,6 @@ Template.select_image.rendered = function(){
 
 	canvas.add(phoneCase);
 	canvas.add(phoneBkg);
-
-	
-	// Set iPhone case outlines
-	var cWidth = canvas.getWidth();
-	var cHeight = canvas.getHeight();
-
-	var outsideW = $('#outside-border').width();
-	var outsideH = $('#outside-border').width();
-	var insideW = $('#inside-border').width();
-	var insideH = $('#inside-border').width();
-
-	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
-	$('#outside-border').css('left', cWidth/2 - outsideW/2);
-	$('#inside-border').css('left', cWidth/2 - insideW/2);
-	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
-
 
 	// Initializing color pickers
 	$("#colorpicker").spectrum({
@@ -137,17 +123,21 @@ Template.select_image.rendered = function(){
   // Adding clipart on clicks
   $('#clipart-box img').click(function(){
   	var imgElement = this;
+  	var containerWidth = $('#canvas-container').width();
 		var image = new fabric.Image(imgElement, {
-		  left: 100,
-		  top: 100,
-		  borderColor: '#2c3e50',
-    	cornerColor: '#2980b9',
-    	transparentCorners: false,
+		  left: containerWidth/2 - canvasOffset,
+		  top: 240,
+    	transparentCorners: true,
     	originX: 'center',
 			originY: 'center',
+			hasBorders: false,
+  		lockUniScaling: true,
+  		hasCorners: false,
+  		borderColor: 'rgba(0,0,0,0)',
+  		cornerColor: 'rgba(0,0,0,0)',
+  		cornerSize: 20,
 		});
 		canvas.add(image);
-		image.center();
 		image.setCoords();
 		canvas.setActiveObject(image);
   });
@@ -164,6 +154,7 @@ Template.select_image.rendered = function(){
   canvas.on('object:selected', function(options) {
 	  var obj = canvas.getActiveObject();
 	  $('#options-box').removeClass("hidden");
+	  $('#object-box').removeClass("hidden");
 	  try{
 	  	switch(obj.type)
 		  {
@@ -237,6 +228,7 @@ Template.select_image.rendered = function(){
 	  var obj = canvas.getActiveObject();
 
 	  $('#options-box').addClass("hidden");
+	  $('#object-box').addClass("hidden");
 	  $('#font-box').addClass("hidden");
 	  $('#image-box').addClass("hidden");
 	  $('#move-up-icon').addClass("hidden");
@@ -280,22 +272,23 @@ Template.select_image.events({
 	},
 	'click #text-icon': function(event){
 		
-
-	  var cCenLeft = (canvas.getWidth() + 0.0) / 2;
-		var cCenTop = (canvas.getHeight() + 0.0) / 2;
-
+		var containerWidth = $('#canvas-container').width();
 		var text = new fabric.Text("", { 
-			left: cCenLeft, 
-			top: cCenTop,
+			left: containerWidth/2 - canvasOffset,
+			top: 240,
 			fontFamily: "Lato",
 			fontSize: 24,
 			lockUniScaling: true,
-			borderColor: '#2c3e50',
-    	cornerColor: '#2980b9',
-    	transparentCorners: false,
-    	originX: 'center',
+			hasBorders: false,
+			hasCorners: false,
+			transparentCorners: true,
+			originX: 'center',
 			originY: 'center',
+			borderColor: 'rgba(0,0,0,0)',
+			cornerColor: 'rgba(0,0,0,0)',
+			cornerSize: 20
 		});
+
 		canvas.add(text);
 		canvas.setActiveObject(text);
 		showEditor();
@@ -338,10 +331,9 @@ Template.select_image.events({
 	'change #font-selector': function(event){
 		var obj = canvas.getActiveObject(); 
 		$('#font-textarea').css('font-family', $('#font-selector').val());
-		canvas.renderAll();
-		alert("Loads");
 		obj.fontFamily = $('#font-selector').val();
 		canvas.renderAll();
+		moveButtons();
 		
 
 	},
@@ -508,10 +500,11 @@ Template.select_image.events({
 });
 
 function newUpload(evt) {
-
 	var reader = new FileReader();
+	var containerWidth = $('#canvas-container').width();
 	reader.onload = function(event) { console.log ('loading reader');
 		var imgObj = new Image()
+
 		imgObj.src = event.target.result;
 		imgObj.onload = function(){
 			// start fabricJS stuff
@@ -520,21 +513,24 @@ function newUpload(evt) {
 			image.set({
 				originX: 'center',
 				originY: 'center',
-				left: 0,
-				top: 0,
+				left: containerWidth/2 - canvasOffset,
+				top: 240,
 				offLeft: 0,
 				offTop: 0,
 				angle: 0,
-				borderColor: '#2c3e50',
-    		cornerColor: '#2980b9',
-    		transparentCorners: false,
+    		transparentCorners: true,
+    		hasBorders: false,
+    		lockUniScaling: true,
+    		hasCorners: false,
+    		borderColor: 'rgba(0,0,0,0)',
+  			cornerColor: 'rgba(0,0,0,0)',
+    		cornerSize: 20,
 			});
 			image.set({
 				scaleY: 260 / (image.width),
     		scaleX: 260/ (image.width),
 			});			
 			canvas.add(image);
-			image.center();
 			image.setCoords();
 			canvas.setActiveObject(image);
 		
@@ -550,7 +546,7 @@ function moveButtons(){
 	var	rY = (obj.currentHeight / 2);
 	var X = obj.left - rX;
 	var Y = obj.top - rY;
-	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 20;
+	var r = Math.pow(Math.pow(rX, 2) + Math.pow(rY, 2), 0.5) + 30;
 	var theta = ((obj.angle) * Math.PI / 180) + Math.atan(rY/rX);
 
 	var optionsH = $('#options-box').height();
@@ -559,35 +555,47 @@ function moveButtons(){
   var IconX = obj.left - r * Math.cos(theta) - optionsW/2;
   var IconY = obj.top - r * Math.sin(theta) - optionsH/2;
 
-  $('#options-box').css("left", IconX);
+  $('#options-box').css("left", IconX + canvasOffset);
 	$('#options-box').css("top", IconY);
 	$('#options-box').css("transform", "rotate(" + obj.angle + "deg)");
 	obj.setCoords();
 
+	$('#object-box').css("width", rX*2);
+	$('#object-box').css("height", rY*2);
+	$('#object-box').css("left", X + canvasOffset);
+	$('#object-box').css("top", Y);
+	$('#object-box').css("transform", "rotate(" + obj.angle + "deg)");
+	obj.setCoords();
+
 };
 function resizeCanvas(){
+
+	canvasOffset = -(oriContWidth - $('#canvas-container').width())/2;
+
+	$('.canvas-container').css("left", canvasOffset);
+
+	moveButtons();
+
 	//resetting size of Canvas
-	var canvasHeight = $(window).height()-$('#instacase-header').height()-14
+	/*var canvasHeight = $(window).height()-$('#instacase-header').height()-14
   if (canvasHeight > 484){
   	canvas.setHeight(canvasHeight);
   } else {
   	canvas.setHeight(484);
-  }
-	canvas.setWidth($('#canvas-container').width());
+  }*/
+
+
+	// canvas.setWidth($('#canvas-container').width());
 
 	//setting OverLay Image
 	//canvas.overlayImage = null;
 
 
 	//set Canvas Height and Width
-	cWidth = canvas.getWidth() + 0.0;
-	cHeight = canvas.getHeight() + 0.0;
+	/*var cWidth = canvas.getWidth() + 0.0;
 
 	var phoneBkg = canvas.item(1);
 	var phoneCase = canvas.item(0);
-	var oWidth = cWidth / 2 - 1000;
-	var oHeight = cHeight / 2 - 500;
-	var cCenterTop = cHeight / 2;
 	var cCenterLeft = cWidth / 2;
 
 	var outsideW = $('#outside-border').width();
@@ -595,21 +603,13 @@ function resizeCanvas(){
 	var insideW = $('#inside-border').width();
 	var insideH = $('#inside-border').width();
 
-	$('#outside-border').css('left', cWidth/2 - outsideW/2);
-	$('#inside-border').css('left', cWidth/2 - insideW/2);
-	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
-	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
-
 	phoneBkg.set({
 		left: cCenterLeft+1,
 	});
 	phoneCase.set({
 		left: cCenterLeft+1,
 	});
-	canvas.renderAll();
-	/*canvas.setOverlayImage(OverlayImg, 
-		canvas.renderAll.bind(canvas), 
-		{overlayImageLeft: oWidth, overlayImageTop: oHeight});*/
+	canvas.renderAll(); */
 
 };
 function getFontInfo(){

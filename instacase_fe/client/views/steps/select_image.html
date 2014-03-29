@@ -1,6 +1,6 @@
 <template name="select_image">
 	
-	<div class="container-fluid thin-padding">
+	<div class="container-fluid thin-padding" id="all-select">
 		<div id="canvas-container">
 			<canvas id="insta-canvas"></canvas>
 			<div class="hidden" id="outside-edge">
@@ -47,8 +47,25 @@
 					<span class="glyphicon glyphicon-arrow-down"></span>
 				</div>
 			</div>
+			<div class="hidden" id="object-box">
+				<div class="resize-icon" id="resize-TL-icon">
+					<span class="glyphicon glyphicon-resize-full"></span>
+				</div>
+				<div class="resize-icon" id="resize-TR-icon">
+					<span class="glyphicon glyphicon-resize-full"></span>
+				</div>
+				<div class="resize-icon" id="resize-BL-icon">
+					<span class="glyphicon glyphicon-resize-full"></span>
+				</div>
+				<div class="resize-icon" id="resize-BR-icon">
+					<span class="glyphicon glyphicon-resize-full"></span>
+				</div>
+				<div class="resize-icon" id="rotate-icon">
+					<span class="glyphicon glyphicon-repeat"></span>
+				</div>
+			</div>
 
-			<div class="command-box" id="order-box">
+			<div class="command-box hidden-on-mobile" id="order-box">
 				<form role="form">
 					<div class="row">
 						<div class="col-xs-12"><h2>Current Order</h2></div>
@@ -125,7 +142,7 @@
 				</div>
 			</div>
 
-			<div class="hidden command-box" id="image-box">
+			<div class="hidden command-box hidden-on-mobile" id="image-box">
 				<div class="row">
 					<div class="col-xs-12"><h2>Adjust image</h2></div>
 				</div>
@@ -147,7 +164,7 @@
 										<button id="filter-Sepia">Cool</button>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row hidden">
 									<div class="col-xs-4">
 								    <button id="filter-Blur">Blur</button>
 								  </div>
@@ -237,7 +254,7 @@
 				</div>
 			</div>
 
-			<div class="hidden command-box" id="font-box">
+			<div class="hidden command-box hidden-on-mobile" id="font-box">
 				<div class="row">
 					<div class="col-xs-12"><h2>Edit text</h2></div>
 				</div>
@@ -291,4 +308,5 @@
 
 		<input type='file' name="files[]" class="hidden" id="image-input" multiple/>
 	</div>
+	{{>footer_font}}
 </template>
