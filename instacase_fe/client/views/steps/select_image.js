@@ -80,11 +80,6 @@ Template.select_image.rendered = function(){
 	var insideW = $('#inside-border').width();
 	var insideH = $('#inside-border').width();
 
-	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
-	$('#outside-border').css('left', cWidth/2 - outsideW/2);
-	$('#inside-border').css('left', cWidth/2 - insideW/2);
-	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
-
 
 	// Initializing color pickers
 	$("#colorpicker").spectrum({
@@ -613,11 +608,6 @@ function resizeCanvas(){
 	var outsideH = $('#outside-border').width();
 	var insideW = $('#inside-border').width();
 	var insideH = $('#inside-border').width();
-
-	$('#outside-border').css('left', cWidth/2 - outsideW/2);
-	$('#inside-border').css('left', cWidth/2 - insideW/2);
-	$('#outside-edge').css('left', cWidth/2 - outsideW/2);
-	$('#camera-border').css('left', cWidth/2 - insideW/2 + 14);
 
 	phoneBkg.set({
 		left: cCenterLeft+1,
