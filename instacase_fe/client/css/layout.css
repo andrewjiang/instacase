@@ -316,7 +316,6 @@ a:hover{
 	#canvas-container{
 		width: 100%;
 		min-height: 484px;
-		border: 1px dashed #fff;
 		position: relative;
 		overflow: hidden;
 	}
@@ -346,10 +345,13 @@ a:hover{
 	#clipart-box{
 		overflow-y: auto;
 	}
+	#clipart-box .form-area{
+		padding-left: 10px;
+	}
 	#clipart-box img{
 		width: 32%;
 		opacity: 1;
-		border: 1px solid black;
+		border: 1px solid #fafbfc;
 		background-color: #FAFBFC;
 		padding: 2px;
 		margin-bottom: 2px;
@@ -358,17 +360,24 @@ a:hover{
 		font-size: 90px;
 		color: #fff;
 	}
+
 	.command-box{
+		top: 10px;
+		right: 10px;
+		border-radius: 5px;
 		position: absolute;
 		height: inherit;
 		background-color: #222;
 		width: 100%;
-		padding: 20px;
+		padding: 14px;
+		background-color: #fefefe;
+		border: 1px solid #e2e2e2;
 	}
 	.command-box h2{
-		color: #ecf0f1;
 		margin-top: 0;
 		margin-bottom: 10px;
+		color: #2c3e50;
+		font-weight: 200;
 	}
 	.command-box label{
 		color: #ddd;
@@ -381,7 +390,7 @@ a:hover{
 		color: #fff;
 	}
 	#font-box{
-		height: 540px;
+		height: inherit;
 		width: 300px;
 	}
 	#image-box{
@@ -391,26 +400,23 @@ a:hover{
 		color: #777;
 	}
 	#clipart-box{
-		height: 600px;
+		height: inherit;
+		width: 400px;
 	}
 	#order-box{
-		height: 320px;
 		width: 300px;
-		padding: 20px;
 	}
 	#order-box input{
 		margin-bottom: 14px;
 	}
+	.form-area{
+		background-color: #2c3e50;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 	#background-box{
 		height: 400px;
 		width: 300px;
-	}
-	.command-box{
-		top: 10px;
-		width: 400px;
-		right: 10px;
-		border-radius: 5px;
-		border: 1px solid #222;
 	}
 	#order-box h2{
 		display: block;
@@ -436,6 +442,9 @@ a:hover{
 	}
 	.object-icon .glyphicon{
 		margin: 0px;
+	}
+	.object-icon:hover{
+		color: #e74c3c;
 	}
 	.resize-icon{
 		position: absolute;
@@ -606,6 +615,7 @@ a:hover{
 		position: absolute;
 		top: 0px;
 		left: 0px;
+		font-size: 20px;
 	}
 	.close-button:hover{
 		color: #e74c3c;

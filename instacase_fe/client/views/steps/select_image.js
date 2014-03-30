@@ -82,9 +82,8 @@ Template.select_image.rendered = function(){
     	showAlpha: true,
     	showPalette: true,
 	    palette: [
-	        ['black', 'white', '#1abc9c', '#16a085', '#2ecc71','#27ae60'],
-	        ['#f1c40f','#f39c12','#e67e22','#d35400','#e74c3c','#c0392b'],
-	        ['#3498db','#2980b9','#34495e','#2c3e50','#9b59b6','#8e44ad']
+	        ['black', 'white', '#1abc9c', '#16a085', '#2ecc71','#27ae60','#f1c40f','#f39c12','#e67e22'],
+	        ['#d35400','#e74c3c','#c0392b','#3498db','#2980b9','#34495e','#2c3e50','#9b59b6','#8e44ad']
 	    ],
 	    showButtons: false,
 	    preferredFormat: "hex",
@@ -439,56 +438,56 @@ Template.select_image.events({
                -1,  -1, -1 ]
     }));
 	},
-    'click #filter-tint-color': function(event){
-        var element = event.currentTarget;
-        applyFilter(5, element.checked && new f.Tint({
-            color: document.getElementById('filter-tint-color-intensity').value,
-            opacity: parseFloat(document.getElementById('filter-tint-color-opacity').value)
-        }));
-    },
-    'change #filter-tint-color-intensity': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(5, 'color', element.value);
-    },
-    'change #filter-tint-color-opacity': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(5, 'opacity', element.value);
-    },
-    'click #filter-brighten': function(event){
-        var enabled = toggleFilterButton(event.currentTarget);
-        applyFilter(6, enabled && new f.Brightness({
-            brightness: parseInt(document.getElementById('filter-brighten-intensity').value, 10)
-        }));
-    },
-    'change #filter-brighten-intensity': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(6, 'brightness', parseInt(element.value, 10));
-    },
-    'click #filter-remove-white': function(event){
-        var element = event.currentTarget;
-        applyFilter(7, element.checked && new f.RemoveWhite({
-            threshold: document.getElementById('filter-remove-white-threshold').value,
-            distance: document.getElementById('filter-remove-white-distance').value
-        }));
-    },
-    'change #filter-remove-white-threshold': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(7, 'threshold', element.value);
-    },
-    'change #filter-remove-white-distance': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(7, 'distance', element.value);
-    },
-    'click #filter-pixelate': function(event){
-        var element = event.currentTarget;
-        applyFilter(8, element.checked && new f.Pixelate({
-            blocksize: parseInt(document.getElementById('filter-pixelate-intensity').value, 10)
-        }));
-    },
-    'change #filter-pixelate-intensity': function(event){
-        var element = event.currentTarget;
-        applyFilterValue(8, 'blocksize', parseInt(element.value, 10));
-    },
+  'click #filter-tint-color': function(event){
+      var element = event.currentTarget;
+      applyFilter(5, element.checked && new f.Tint({
+          color: document.getElementById('filter-tint-color-intensity').value,
+          opacity: parseFloat(document.getElementById('filter-tint-color-opacity').value)
+      }));
+  },
+  'change #filter-tint-color-intensity': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(5, 'color', element.value);
+  },
+  'change #filter-tint-color-opacity': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(5, 'opacity', element.value);
+  },
+  'click #filter-brighten': function(event){
+      var enabled = toggleFilterButton(event.currentTarget);
+      applyFilter(6, enabled && new f.Brightness({
+          brightness: parseInt(document.getElementById('filter-brighten-intensity').value, 10)
+      }));
+  },
+  'change #filter-brighten-intensity': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(6, 'brightness', parseInt(element.value, 10));
+  },
+  'click #filter-remove-white': function(event){
+      var element = event.currentTarget;
+      applyFilter(7, element.checked && new f.RemoveWhite({
+          threshold: document.getElementById('filter-remove-white-threshold').value,
+          distance: document.getElementById('filter-remove-white-distance').value
+      }));
+  },
+  'change #filter-remove-white-threshold': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(7, 'threshold', element.value);
+  },
+  'change #filter-remove-white-distance': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(7, 'distance', element.value);
+  },
+  'click #filter-pixelate': function(event){
+      var element = event.currentTarget;
+      applyFilter(8, element.checked && new f.Pixelate({
+          blocksize: parseInt(document.getElementById('filter-pixelate-intensity').value, 10)
+      }));
+  },
+  'change #filter-pixelate-intensity': function(event){
+      var element = event.currentTarget;
+      applyFilterValue(8, 'blocksize', parseInt(element.value, 10));
+  },
 
 	// Order Options
 	'change #order-quantity': function(event){
@@ -496,6 +495,10 @@ Template.select_image.events({
 		console.log(quantity);
 		setPrice(quantity);
 	},
+
+	'click #order-checkout': function(event){
+		console.log(JSON.stringify(canvas));
+	}
 
 });
 
@@ -574,7 +577,9 @@ function resizeCanvas(){
 
 	$('.canvas-container').css("left", canvasOffset);
 
-	moveButtons();
+	if(canvas.getActiveObject()){
+		moveButtons();
+	};
 
 	//resetting size of Canvas
 	/*var canvasHeight = $(window).height()-$('#instacase-header').height()-14

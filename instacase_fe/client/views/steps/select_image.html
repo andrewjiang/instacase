@@ -66,11 +66,11 @@
 			</div>
 
 			<div class="command-box hidden-on-mobile" id="order-box">
-				<form role="form">
+				<!--form role="form"-->
 					<div class="row">
 						<div class="col-xs-12"><h2>Current Order</h2></div>
 					</div>
-					<div class="row">
+					<div class="row form-area" id="order-area">
 						<div class="col-xs-4 hidden-on-mobile">
 					  	<label for="order-quantity" class="hidden-on-mobile">Quantity</label>
 					  	<label for="order-quantity" class="hidden-on-web">#</label>
@@ -103,11 +103,11 @@
 					  <div class="col-sm-8" id="order-total">
 					    $<span id="order-value">10</span> + Shipping
 					  </div>
-						<div class="col-xs-12">
-						   <button type="submit" class="btn btn-primary btn-block btn-lg" id="order-checkout"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</button>
-						</div>
 					</div>
-				</form>
+					<div class="col-xs-12">
+					   <button class="btn btn-primary btn-block btn-lg" id="order-checkout"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</button>
+					</div>
+				<!--/form-->
 			</div>
 
 			<div class="hidden command-box" id="clipart-box">
@@ -117,15 +117,17 @@
 				<div class="row">
 					<div class="col-xs-12"><h2>Select clipart</h2></div>
 				</div>
-				<img src="/clipart/icon_1108.png">
-				<img src="/clipart/icon_1642.png">
-				<img src="/clipart/icon_3708.png">
-				<img src="/clipart/icon_4895.png">
-				<img src="/clipart/icon_8124.png">
-				<img src="/clipart/icon_19462.png">
-				<img src="/clipart/icon_30130.png">
-				<img src="/clipart/icon_35195.png">
-				<img src="/clipart/icon_35490.png">
+				<div class="row form-area">
+					<img src="/clipart/icon_1108.png">
+					<img src="/clipart/icon_1642.png">
+					<img src="/clipart/icon_3708.png">
+					<img src="/clipart/icon_4895.png">
+					<img src="/clipart/icon_8124.png">
+					<img src="/clipart/icon_19462.png">
+					<img src="/clipart/icon_30130.png">
+					<img src="/clipart/icon_35195.png">
+					<img src="/clipart/icon_35490.png">
+				</div>
 			</div>
 
 			<div class="command-box hidden" id="background-box">
@@ -143,10 +145,13 @@
 			</div>
 
 			<div class="hidden command-box hidden-on-mobile" id="image-box">
+				<div class="close-button">
+					<span class="glyphicon glyphicon-remove"></span>
+				</div>
 				<div class="row">
 					<div class="col-xs-12"><h2>Adjust image</h2></div>
 				</div>
-				<div class="row">
+				<div class="row form-area">
 					<div class="col-xs-12">
 						<div class="panel panel-info" id="filter-box">
 							<div class="panel-heading">
@@ -255,52 +260,61 @@
 			</div>
 
 			<div class="hidden command-box hidden-on-mobile" id="font-box">
+				<div class="close-button">
+					<span class="glyphicon glyphicon-remove"></span>
+				</div>
 				<div class="row">
 					<div class="col-xs-12"><h2>Edit text</h2></div>
 				</div>
-				<div class="row">
+				<div class="row form-area">
 					<div class="col-xs-12">
-						<textarea rows="2" class="form-control" id="font-textarea" placeholder="Your Text"></textarea>
+						<div class="row">
 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
-
-						<!--TODO - put in custom selector showing font family before selection-->
-						<select id="font-selector" class="form-control">
-							<option>Select a font</option>
-							<option>Abril Fatface</option>
-							<option>Arvo</option>
-							<option>Cardo</option>
-							<option>Courier New</option>
-							<option>Droid Sans</option>							
-							<option>Helvetica</option>
-							<option>Josefin Slab</option>
-							<option>Lato</option>
-							<option>Lobster</option>
-							<option>Montserrat Alternates</option>
-							<option>Open Sans</option>
-							<option>Oswald</option>
-							<option>PT Mono</option>
-							<option>Times New Roman</option>
-							<option>Ubuntu</option>
-							<option>Varela</option>
-							<option>Vollkorn</option>
-							<option>Wingdings</option>
-						</select>
-					</div>
-					<div class="col-xs-6" id="font-align"> 
-						<div class="btn-group pull-right">
-						  <button type="button" class="btn btn-default" id="align-left"><span class="glyphicon glyphicon-align-left"></span></button>
-						  <button type="button" class="btn btn-default" id="align-center"><span class="glyphicon glyphicon-align-center"></span></button>
-						  <button type="button" class="btn btn-default" id="align-right"><span class="glyphicon glyphicon-align-right"></span></button>
+							<div class="col-xs-12">
+								<textarea rows="2" class="form-control" id="font-textarea" placeholder="Your Text"></textarea>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<input id='colorpicker' />
+						<div class="row">
+							<div class="col-xs-6">
+
+								<!--TODO - put in custom selector showing font family before selection-->
+								<select id="font-selector" class="form-control">
+									<option>Select a font</option>
+									<option>Abril Fatface</option>
+									<option>Arvo</option>
+									<option>Cardo</option>
+									<option>Courier New</option>
+									<option>Droid Sans</option>							
+									<option>Helvetica</option>
+									<option>Josefin Slab</option>
+									<option>Lato</option>
+									<option>Lobster</option>
+									<option>Montserrat Alternates</option>
+									<option>Open Sans</option>
+									<option>Oswald</option>
+									<option>PT Mono</option>
+									<option>Times New Roman</option>
+									<option>Ubuntu</option>
+									<option>Varela</option>
+									<option>Vollkorn</option>
+									<option>Wingdings</option>
+								</select>
+							</div>
+						
+
+							<div class="col-xs-6" id="font-align"> 
+								<div class="btn-group pull-right">
+								  <button type="button" class="btn btn-default" id="align-left"><span class="glyphicon glyphicon-align-left"></span></button>
+								  <button type="button" class="btn btn-default" id="align-center"><span class="glyphicon glyphicon-align-center"></span></button>
+								  <button type="button" class="btn btn-default" id="align-right"><span class="glyphicon glyphicon-align-right"></span></button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input id='colorpicker' />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
