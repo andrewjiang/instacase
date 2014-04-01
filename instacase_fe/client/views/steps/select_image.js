@@ -463,21 +463,6 @@ Template.select_image.events({
       var element = event.currentTarget;
       applyFilterValue(6, 'brightness', parseInt(element.value, 10));
   },
-  'click #filter-remove-white': function(event){
-      var element = event.currentTarget;
-      applyFilter(7, element.checked && new f.RemoveWhite({
-          threshold: document.getElementById('filter-remove-white-threshold').value,
-          distance: document.getElementById('filter-remove-white-distance').value
-      }));
-  },
-  'change #filter-remove-white-threshold': function(event){
-      var element = event.currentTarget;
-      applyFilterValue(7, 'threshold', element.value);
-  },
-  'change #filter-remove-white-distance': function(event){
-      var element = event.currentTarget;
-      applyFilterValue(7, 'distance', element.value);
-  },
   'click #filter-pixelate': function(event){
       var element = event.currentTarget;
       applyFilter(8, element.checked && new f.Pixelate({
