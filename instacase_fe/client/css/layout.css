@@ -198,15 +198,6 @@ a:hover{
 	margin-top: 8px;
 	margin-bottom: 0px;
 }
-@media (min-width: 768px){
-	.instacase-brand img{
-		height: 50px;
-		margin-right: 10px;
-		margin-bottom: 4px;
-	}
-
-
-}
 #instacase-header{
 	background-color: #FAFBFC;
 	border-bottom: 2px solid #777;
@@ -242,14 +233,6 @@ a:hover{
 	margin: 3px;
 	font-size: 24px;
 }
-@media (min-width: 768px){
-	.select-model {
-		margin-top: 40px;
-	}
-	.select-model img{
-		height: 250px;
-	}
-}
 .disabled{
 	color: #555 !important;
 }
@@ -262,16 +245,6 @@ a:hover{
 		width: 49.5%;
 		display: inline;
 		margin-bottom: 3px;
-	}
-	@media (min-width: 1000px){
-		#home-collage img{
-			width: 24.5%;
-		}
-	}
-	@media (min-width: 768px) and (max-width: 1000px){
-		#home-collage img{
-			width: 32.5%;
-		}
 	}
 	#home-buttons{
 		margin-top: 40px;
@@ -301,15 +274,6 @@ a:hover{
 		color: #fff;
 		text-align: center;
 		padding-top: 80px;
-	}
-
-/* Choose Phone */
-	
-	@media (min-width: 768px){
-		.insta-title{
-			padding: 20px;
-			font-size: 38px;
-		}
 	}
 
 /* Select Image */
@@ -542,18 +506,6 @@ a:hover{
 		left: 40px;
 	}
 	
-	@media (max-width: 768px){
-		#control-box{
-			padding: 0px;
-			background-color: transparent;
-			border: none;
-		}
-		.control-icon{
-			width: inherit;
-		}
-	}
-	
-	
 	#case-absolute{
 		left: 50%;
 		position: absolute;
@@ -675,21 +627,6 @@ a:hover{
 	#instacase-collapse .navbar-nav{
 		margin-left: 20px;
 	}
-	.navbar-nav li.active a{
-		background-color: transparent !important;
-		border-top: 3px solid #3498db;
-	}
-	.navbar-nav li a:hover{
-		background-color: transparent !important;
-		border-top: 3px solid #3498db;
-	}
-
-	.navbar-nav li a{
-		border-top: 3px solid #FAFBFc;
-		padding-left: 4px;
-		padding-right: 4px;
-		margin: -4px 6px 0px 6px;
-	}
 
 /* Layouts CSS */
 	body{
@@ -776,12 +713,6 @@ a:hover{
 	}
 	#insta-footer-buttons .col-xs-3.selected{
 		background-color: #333;
-	}
-	@media (min-width: 768px){
-		#insta-footer{
-			position: absolute !important;
-			bottom: 0px;
-		}
 	}
 	#footer-company{
 		padding-top: 10px;
@@ -1113,7 +1044,37 @@ a:hover{
 		
 	}
 /* End StepThree CSS */
-@media (min-width: 769px){
+
+ul.nav {
+  margin: 0;
+}
+.nav > li {
+  background-color: #FAFBFC;
+}
+.navbar-nav li a {
+		border-top: 3px solid #FAFBFC;
+}
+.navbar-nav li.active a {
+		border-top: 3px solid #3498db;
+}
+	.navbar-nav li a:hover{
+		border-top: 3px solid #3498db;
+	}
+
+@media (min-width: 768px){
+	.navbar-nav li.active a{
+		background-color: transparent !important;
+	}
+	.navbar-nav li a:hover{
+		background-color: transparent !important;
+	}
+
+	.navbar-nav li a{
+		border-top: 3px solid #FAFBFc;
+		padding-left: 4px;
+		padding-right: 4px;
+		margin: -4px 6px 0px 6px;
+	}
 	.hidden-on-web{
 		display: none;
 	}
@@ -1123,3 +1084,56 @@ a:hover{
 		display: none;
 	}
 }
+@media (min-width: 768px){
+	.instacase-brand img{
+		height: 50px;
+		margin-right: 10px;
+		margin-bottom: 4px;
+	}
+
+
+}
+@media (min-width: 768px){
+	.select-model {
+		margin-top: 40px;
+	}
+	.select-model img{
+		height: 250px;
+	}
+}
+	@media (min-width: 1000px){
+		#home-collage img{
+			width: 24.5%;
+		}
+	}
+	@media (min-width: 768px) and (max-width: 1000px){
+		#home-collage img{
+			width: 32.5%;
+		}
+	}
+/* Choose Phone */
+	
+	@media (min-width: 768px){
+		.insta-title{
+			padding: 20px;
+			font-size: 38px;
+		}
+	}
+
+	@media (max-width: 768px){
+		#control-box{
+			padding: 0px;
+			background-color: transparent;
+			border: none;
+		}
+		.control-icon{
+			width: inherit;
+		}
+	}
+	
+	@media (min-width: 768px){
+		#insta-footer{
+			position: absolute !important;
+			bottom: 0px;
+		}
+	}
