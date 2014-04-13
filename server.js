@@ -53,7 +53,8 @@ var app = express();
 require('./config/express')(app, config, passport);
 
 // Load routes
-require('./config/routes')(app, passport);
+var auth = require('./config/middlewares/authorization');
+require('./config/routes')(app, passport, auth);
 
 // Start the app!
 app.set('port', process.env.PORT || 3000);

@@ -42,6 +42,7 @@ Assertion.add = function(name, f, isGetter) {
   prop[isGetter ? 'get' : 'value'] = function() {
     var context = new Assertion(this.obj);
     context.copy = context.copyIfMissing;
+    context.one = this.one;
 
     try {
       f.apply(context, arguments);
@@ -142,7 +143,7 @@ Assertion.prototype = {
   },
 
   getMessage: function() {
-    return 'expected ' + i(this.obj) + (this.negate ? ' not ': ' ') +
+    return 'expected ' + ('obj' in this.params ? this.params.obj: i(this.obj)) + (this.negate ? ' not ': ' ') +
         this.params.operator + ('expected' in this.params  ? ' ' + i(this.params.expected) : '');
   },
 
@@ -163,6 +164,16 @@ Assertion.prototype = {
 
   get not() {
     this.negate = !this.negate;
+    return this;
+  },
+
+  /**
+   * Any modifier - it affect on execution of sequenced assertion to do not check all, but any of
+   *
+   * @api public
+   */
+  get any() {
+    this.one = true;
     return this;
   }
 };

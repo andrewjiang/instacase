@@ -5,7 +5,7 @@ var users = require('../app/controllers/users');
 var cases = require('../app/controllers/cases');
 
 // Expose routes
-module.exports = function(app, passport) {
+module.exports = function(app, passport, auth) {
     // Home
     app.get('/', cases.index);
 
@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
     app.get('/logout', users.logout);
 
     app.post('/users', users.create);
-    app.get('/users/:userId', users.show);
+    app.get('/users/:userId', auth.requiresLogin, auth.user.hasAuthorization, users.show);
 
     // Local auth strategy
     app.get('/signup', users.signup);

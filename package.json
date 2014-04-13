@@ -19,7 +19,7 @@
         "view-helpers": "latest",
         "forever": "latest",
         "winston": "latest",
-        "hogan-express": "*"
+        "express3-handlebars": "latest"
     },
     "devDependencies": {
         "supertest": "latest",

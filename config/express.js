@@ -41,17 +41,25 @@ module.exports = function(app, config, passport) {
     }
 
     // View engine setup
-    app.set('view engine', 'html');
-    app.set('layout', 'layout/layout');
-    app.set('view options', { layout: true });
+    //app.set('view engine', 'html');
+    //app.set('layout', 'layout/layout');
+    //app.set('view options', { layout: true });
 
-    app.set('partials', {
-        header: 'layout/header',
-        footer: 'layout/footer'
-    });
+    //app.set('partials', {
+    //    header: 'layout/header',
+    //    footer: 'layout/footer'
+    //});
 
     //app.enable('view cache');
-    app.engine('html', require('hogan-express'));
+    //app.engine('html', require('hogan-express'));
+    app.engine('handlebars', require('express3-handlebars')({
+        layoutsDir: 'app/views/layout',
+        defaultLayout: 'layout',
+        partialsDir: [
+            'app/views/layout'
+        ]
+    }));
+    app.set('view engine', 'handlebars');
 
     app.set('views', config.root + '/app/views');
 
