@@ -1,16 +1,26 @@
 var async = require('async');
 
-// Load controllers
-var users = require('../app/controllers/users');
-var cases = require('../app/controllers/cases');
-
 // Expose routes
 module.exports = function(app, passport, auth) {
+    // **** Cases
+    var cases = require('../app/controllers/cases_controller');
+
     // Home
     app.get('/', cases.index);
 
     // Create a new case
     app.get('/cases/create', cases.create);
+
+    // **** API endpoint
+    app.get('/subdomain/api/', function () {});
+
+    // **** Storefronts
+    var storefronts = require('../app/controllers/storefronts_controller');
+
+    app.get('/subdomain/:storeName', storefronts.show);
+
+    // **** Users and authentication
+    var users = require('../app/controllers/users_controller');
 
     app.get('/login', users.login);
     app.get('/logout', users.logout);

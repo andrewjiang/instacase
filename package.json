@@ -19,7 +19,8 @@
         "view-helpers": "latest",
         "forever": "latest",
         "winston": "latest",
-        "express3-handlebars": "latest"
+        "express3-handlebars": "latest",
+        "express-subdomain-handler": "latest"
     },
     "devDependencies": {
         "supertest": "latest",

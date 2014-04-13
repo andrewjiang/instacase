@@ -40,18 +40,7 @@ module.exports = function(app, config, passport) {
         app.use(express.logger(log));
     }
 
-    // View engine setup
-    //app.set('view engine', 'html');
-    //app.set('layout', 'layout/layout');
-    //app.set('view options', { layout: true });
-
-    //app.set('partials', {
-    //    header: 'layout/header',
-    //    footer: 'layout/footer'
-    //});
-
     //app.enable('view cache');
-    //app.engine('html', require('hogan-express'));
     app.engine('handlebars', require('express3-handlebars')({
         layoutsDir: 'app/views/layout',
         defaultLayout: 'layout',
@@ -106,6 +95,9 @@ module.exports = function(app, config, passport) {
                 next();
             });
         }
+
+        // Add subdomain support
+        app.use(require('express-subdomain-handler')({ baseUrl: 'battletrophy.com' }));
 
         // Hook up the router
         app.use(app.router);
