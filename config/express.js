@@ -42,10 +42,10 @@ module.exports = function(app, config, passport) {
 
     //app.enable('view cache');
     app.engine('handlebars', require('express3-handlebars')({
-        layoutsDir: 'app/views/layout',
+        layoutsDir: config.root + '/app/views/layout',
         defaultLayout: 'layout',
         partialsDir: [
-            'app/views/layout'
+            config.root + '/app/views/layout'
         ]
     }));
     app.set('view engine', 'handlebars');
