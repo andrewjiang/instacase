@@ -94,7 +94,6 @@ module.exports = function(app, config, passport) {
     app.use(expressWinston.errorLogger({
         transports: [
             new winston.transports.Console({
-                json: true,
                 colorize: true
             })
         ]

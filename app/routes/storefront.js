@@ -1,8 +1,10 @@
 var express = require('express');
-var storefronts = require('../controllers/storefronts_controller');
 
 var storefront = express.Router();
+var storefronts = require('../controllers/storefronts_controller');
 
-storefront.get('/:storeName', storefronts.show);
+/* GET show storefront */
+storefront.route('/:storeName')
+    .get(storefronts.show);
 
 module.exports = storefront
