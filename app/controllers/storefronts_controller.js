@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Storefront = mongoose.model('Storefront');
+var domain = require('../util/domain');
 
 /* GET storefront */
 exports.show = function(req, res) {
@@ -11,7 +12,7 @@ exports.show = function(req, res) {
     }
     else {
         req.flash('warning', 'No storefront found by that name!');
-        res.redirect('/');
+        res.redirect(domain.getUrl());
     }
 }
 

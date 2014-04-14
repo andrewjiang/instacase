@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Storefront = mongoose.model('Storefront');
+var domain = require('../util/domain');
 
 /* GET storefront */
 exports.show_create = function(req, res) {
@@ -49,20 +50,8 @@ exports.do_create = function(req, res) {
                         });
                     }
 
-                    
-                    // TODO: this should be a helper function in another module
-                    var isProduction = 'production' === process.env.NODE_ENV;
-                    var redirectUrl;
-
-                    if (isProduction) {
-                        redirectUrl = 'https://' + storefront.short_name + '.battletrophy.com';
-                    }
-                    else {
-                        redirectUrl = '/subdomain/' + storefront.short_name;
-                    }
-
                     req.flash('success', 'Your storefront has been created!');
-                    res.redirect(redirectUrl);
+                    res.redirect(domain.getUrl(storefront.short_name));
                 });
             }
         });
