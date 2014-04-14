@@ -114,7 +114,9 @@ module.exports = function(app, config, passport) {
         console.error(err.stack);
 
         // error page
-        res.status(500).render('500', { error: err.stack });
+        res.status(500).render('500', {
+            error: ('development' === env) ? err.stack : 'Your hair is on fire!'
+        });
     });
 
 
@@ -125,7 +127,7 @@ module.exports = function(app, config, passport) {
         });
     });
 
-    if ('development' == env) {
+    if ('development' === env) {
         app.locals.pretty = true;
     }
 }
