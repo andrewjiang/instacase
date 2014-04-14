@@ -55,7 +55,7 @@ exports.do_create = function(req, res) {
                     var redirectUrl;
 
                     if (isProduction) {
-                        redirectUrl = 'https://' + storefront.short_name + 'battletrophy.com';
+                        redirectUrl = 'https://' + storefront.short_name + '.battletrophy.com';
                     }
                     else {
                         redirectUrl = '/subdomain/' + storefront.short_name;
