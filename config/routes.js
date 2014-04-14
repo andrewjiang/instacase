@@ -12,10 +12,13 @@ module.exports = function(app, passport, auth) {
     app.get('/cases/create', cases.create);
 
     // **** API endpoint
-    app.get('/api', function () {});
+    app.use('/api/v1', require('../app/routes/api_v1'));
+
+    // **** Storefront Utils
+    app.use('/storefront', require('../app/routes/storefront'));
 
     // **** Storefronts
-    app.use('/subdomain', require('../app/routes/storefront'));
+    app.use('/subdomain', require('../app/routes/storefronts'));
 
     // **** Users and authentication
     var users = require('../app/controllers/users_controller');

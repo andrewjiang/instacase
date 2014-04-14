@@ -15,6 +15,11 @@ module.exports = function(app, config, passport) {
         level: 9
     }));
 
+    app.use(require('stylus').middleware(config.root + '/public'));
+    app.use(express.static(config.root + '/public'));
+
+    //app.use(require('static-favicon')(config.root + '/public/favicon.ico'));
+
     //app.enable('view cache');
     app.engine('handlebars', require('express3-handlebars')({
         layoutsDir: config.root + '/app/views/layout',
@@ -27,10 +32,6 @@ module.exports = function(app, config, passport) {
 
     app.set('views', config.root + '/app/views');
 
-    //app.use(require('static-favicon')(config.root + '/public/favicon.ico'));
-    app.use(require('stylus').middleware(config.root + '/public'));
-    app.use(express.static(config.root + '/public'));
-
     // Expose package.json to views
     var pkg = require('../package.json');
     app.use(function(req, res, next) {
@@ -38,11 +39,11 @@ module.exports = function(app, config, passport) {
         next();
     });
 
-    var bodyParser = require('body-parser');
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded());
     app.use(require('cookie-parser')());
     app.use(require('method-override')());
+    app.use(require('body-parser')());
+
+    app.use(require('express-validator')());
 
     // Express/Mongo session storage
     var session = require('express-session');
@@ -55,6 +56,15 @@ module.exports = function(app, config, passport) {
         })
     }));
 
+    // Add CSRF protection
+    if (process.env.NODE_ENV !== 'test') {
+        app.use(require('csurf')());
+        app.use(function(req, res, next) {
+            res.locals.csrf_token = req.csrfToken();
+            next();
+        });
+    }
+
     // Use passport session
     app.use(passport.initialize());
     app.use(passport.session());
@@ -63,16 +73,6 @@ module.exports = function(app, config, passport) {
     app.use(require('connect-flash')());
 
     app.use(require('view-helpers')(pkg.name));
-
-    // Add CSRF protection
-    if (process.env.NODE_ENV !== 'test') {
-        app.use(require('csurf')());
-
-        app.use(function(req, res, next) {
-            res.locals.csrf_token = req.csrfToken();
-            next();
-        });
-    }
 
     // Add subdomain support
     app.use(require('express-subdomain-handler')({ baseUrl: 'battletrophy.com' }));

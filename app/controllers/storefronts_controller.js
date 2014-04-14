@@ -5,11 +5,12 @@ var Storefront = mongoose.model('Storefront');
 exports.show = function(req, res) {
     if (req.storefront) {
         res.render('storefronts/show', {
-            name: req.params.storeName // todo: pull from model itself
+            name: req.storefront.name,
+            store_url: 'https://' + req.storefront.short_name + '.battletrophy.com'
         });
     }
     else {
-        req.flash('info', ['No storefront found by that name!']);
+        req.flash('warning', 'No storefront found by that name!');
         res.redirect('/');
     }
 }
