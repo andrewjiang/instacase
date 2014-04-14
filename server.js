@@ -52,10 +52,6 @@ var app = express();
 // Load express settings
 require('./config/express')(app, config, passport);
 
-// Load routes
-var auth = require('./config/middlewares/authorization');
-require('./config/routes')(app, passport, auth);
-
 // Start the app!
 app.set('port', process.env.PORT || 3000);
 debug('Setting port to ' + app.get('port') + ' and starting server');
