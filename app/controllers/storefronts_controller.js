@@ -3,9 +3,15 @@ var Storefront = mongoose.model('Storefront');
 
 /* GET storefront */
 exports.show = function(req, res) {
-    res.render('storefronts/show', {
-        name: req.params.storeName
-    });
+    if (req.storefront) {
+        res.render('storefronts/show', {
+            name: req.params.storeName // todo: pull from model itself
+        });
+    }
+    else {
+        req.flash('info', ['No storefront found by that name!']);
+        res.redirect('/');
+    }
 }
 
 exports.checkStoreName = function(req, res, next, name) {
@@ -13,8 +19,7 @@ exports.checkStoreName = function(req, res, next, name) {
         .findOne({ short_name: name })
         .exec(function (err, storefront) {
             if (err) return next(err);
-            if (!storefront) return next(new Error('No storefront found by name: ' + name));
-            req.storefront = Storefront;
+            req.storefront = storefront;
             next();
         });
 };
