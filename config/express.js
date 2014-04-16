@@ -58,9 +58,29 @@ module.exports = function(app, config, passport) {
 
     // Add CSRF protection
     if (process.env.NODE_ENV !== 'test') {
-        app.use(require('csurf')());
+        var csrfWhitelist = new Array('/api/v1/preview', '/api/v1/store');
+
+        var expressCSRF = require('csurf')();
+        // Create a CSRF middleware with whitelist support
+        var whitelistCSRF = function (req, res, next) {
+            var csrfEnabled = true;
+            if (csrfWhitelist.indexOf(req.path) != -1) {
+                csrfEnabled = false;
+            }
+
+            if (csrfEnabled) {
+                expressCSRF(req, res, next);
+            }
+            else {
+                next();
+            }
+        };
+        app.use(whitelistCSRF);
         app.use(function(req, res, next) {
-            res.locals.csrf_token = req.csrfToken();
+            // Only insert a CSRF token if required
+            if (req.csrfToken) {
+                res.locals.csrf_token = req.csrfToken();
+            }
             next();
         });
     }
